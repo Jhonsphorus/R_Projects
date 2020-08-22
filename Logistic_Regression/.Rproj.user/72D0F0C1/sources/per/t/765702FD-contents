@@ -1,0 +1,169 @@
+---
+title: "Logistic Regression"
+author: "Johnson Adebayo_SCV1007 (Cohort 1)"
+date: "4/7/2020"
+output: html_document
+---
+
+
+```{r}
+
+data()
+```
+
+```{r}
+data("BreastCancer")
+View(BreastCancer)
+```
+
+# For Collecting only the data withount NA
+```{r}
+b_canc = BreastCancer[complete.cases(BreastCancer),] # Remove the null value
+b_canc
+```
+
+# For Checking for Null
+```{r}
+#sum(is.na(BreastCancer))
+sapply(BreastCancer, function(x) {sum(is.na(x))})
+```
+# Number or rows and columns
+```{r}
+nrow(BreastCancer)
+ncol(BreastCancer)
+```
+
+# Structure of the dataset
+```{r}
+str(BreastCancer)
+```
+
+# Splitting dataset
+We now split our data into training and test set with the training set holding 70% of the data and test set comprising of the remaining percentage.
+
+```{r}
+library(caret)
+set.seed(10)
+train_ratio <- createDataPartition(b_canc$Class, p=0.7,list = FALSE)
+trainData <- b_canc[train_ratio,]
+testData <- b_canc[-train_ratio,]
+
+```
+
+N: Method2: for splitting
+```{r}
+library(rsample)
+set.seed(100)
+train_test <- initial_split(b_canc, p=0.7)
+train_Data <- training(train_test)
+test_Data <- testing(train_test)
+```
+
+# Fitting logistic model
+```{r}
+logis1 <- glm(Class~Cell.shape,family ="binomial" , data =trainData)
+
+```
+
+```{r}
+summary(logis1)
+```
+
+
+```{r}
+pred1 <- predict(logis1,testData)
+logisDf <- data.frame(testData$Class,pred1)
+colnames(logisDf) <- c("Actual","Predicted")
+View(logisDf)
+
+```
+
+# Converting the result to categorical variable
+```{r}
+sapply(pred1, function(x) {
+  if(x<=0.5){
+    return("benign")
+  }
+  else{
+    return("malignant")
+  }
+})
+```
+
+
+# Alternatively: Fitting the model using train() function in caret
+```{r}
+control <- trainControl("repeatedcv",number = 10, repeats = 3)
+metric <- "Accuracy"
+```
+
+```{r}
+logis2 <- train(Class~Cell.shape,data=trainData, method="glm",family="binomial",trControl=control,preProcess=c("center","scale"),tuneLength=5, metric=metric)
+```
+
+```{r}
+summary(logis2)
+```
+
+```{r}
+pred2 <- predict(logis2,testData)
+logisDf2 <- data.frame(testData$Class,pred2)
+View(logisDf2)
+
+```
+
+```{r}
+table(pred2,testData$Class)
+
+```
+
+```{r}
+accuracy <- (123+64)/(123+10+7+64)
+paste("Accuracy: ",accuracy )
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+

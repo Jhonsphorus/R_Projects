@@ -1,0 +1,5 @@
+"0","preProcess_range_model <- preProcess(trainData, method='range')"
+"0","trainData <- predict(preProcess_range_model, newdata = trainData)"
+"0",""
+"0","# Append the Y variable"
+"0","trainData$Purchase <- y # Adding the response variable (column) back to the trainData"

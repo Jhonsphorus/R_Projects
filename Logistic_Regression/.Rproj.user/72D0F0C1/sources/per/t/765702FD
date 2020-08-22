@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586274707177.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3293665128",
+    "id" : "765702FD",
+    "lastKnownWriteTime" : 1586303927,
+    "last_content_update" : 1586303927855,
+    "path" : "~/RProject/Personal_Practice_New/Logistic_Regression/Logistic_Regression.Rmd",
+    "project_path" : "Logistic_Regression.Rmd",
+    "properties" : {
+        "cursorPosition" : "6,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

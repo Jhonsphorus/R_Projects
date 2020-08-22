@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591745311921.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "79836E2C",
+    "lastKnownWriteTime" : 1591744632,
+    "last_content_update" : 1591745311921,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "FC3FB747",
+        "caption" : "subInternetFixedWired2",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=subInternetFixedWired2&cache_key=FC3FB747",
+        "displayedObservations" : 120,
+        "environment" : "",
+        "expression" : "subInternetFixedWired2",
+        "object" : "subInternetFixedWired2",
+        "preview" : 0,
+        "totalObservations" : 120,
+        "variables" : 3
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 15,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

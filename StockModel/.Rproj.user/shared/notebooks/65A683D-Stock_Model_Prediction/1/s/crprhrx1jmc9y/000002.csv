@@ -1,0 +1,8 @@
+"0","high <- quantile(stocks$performance_percent, .90)"
+"0","low <- quantile(stocks$performance_percent, .75)"
+"0","stocks <- stocks[stocks$performance_percent <= high,]"
+"0","#View(stocks)"
+"0",""
+"0","stocks$Buy <- 'No'"
+"0","stocks$Buy[stocks$performance_percent >= low] <- 'Yes'"
+"0","stocks$Buy <- factor(stocks$Buy, levels = c('No','Yes'))"

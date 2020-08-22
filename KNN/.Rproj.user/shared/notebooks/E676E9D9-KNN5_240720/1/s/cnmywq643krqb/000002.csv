@@ -1,0 +1,5 @@
+"0","set.seed(3033)"
+"0","intrain <- createDataPartition(y = wine_df$V1, p= 0.7, list = FALSE)"
+"0","training <- wine_df[intrain,]"
+"0","testing <- wine_df[-intrain,]"
+"0",""

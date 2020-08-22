@@ -1,0 +1,24 @@
+"0","set.seed(100)"
+"0","options(warn=-1)"
+"0",""
+"0","subsets <- c(1:5, 10, 15, 18)"
+"0",""
+"0","ctrl <- rfeControl(functions = rfFuncs,method = ""repeatedcv"",repeats = 5,verbose = FALSE)"
+"0",""
+"0","lmProfile <- rfe(x=trainData[, 1:18], y=trainData$Purchase,sizes = subsets,rfeControl = ctrl)"
+"0",""
+"0","lmProfile"
+"1","
+Recursive feature selection
+
+"
+"1","Outer resampling method:"
+"1"," "
+"1","Cross-Validated (10 fold, repeated 5 times)"
+"1"," "
+"1","
+"
+"1","
+Resampling performance over subset size:
+
+"

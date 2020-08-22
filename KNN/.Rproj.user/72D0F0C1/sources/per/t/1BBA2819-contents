@@ -1,0 +1,203 @@
+---
+title: "KNN_2"
+author: "Johnson Adebayo"
+date: "5/6/2020"
+output: html_document
+---
+
+#Source: https://online.stat.psu.edu/stat508/book/export/html/796
+
+# Objective of Analysis: Minimization of risk and maximization of profit on behalf of the bank.
+
+
+```{r}
+library(caret)
+loan <- read.csv("german_credit.csv")
+```
+
+# Step 1 - Exploratory Data Analysis (EDA) and Data Pre-processing
+# Before getting into any sophisticated analysis, the first step is to do an EDA and data cleaning. Since both categorical and continuous variables are included in the data set, appropriate tables and summary statistics are provided.
+
+# Creating marginal proportional tables
+
+# The tables below are marginal proportional tables which show the proportion of the categories (level) in the marginal value of each feature. For example in Duration.in.Current.address has 13% of the 1000 applicants to be 1 year, 30.8% btw 1-4 years, 14.9% btw 4-7years and 41.3% above 7 years.
+
+# Note: You used this marginal proportional table or simply table for "categorical variable"
+```{r}
+#{r, attach=loan}
+# Option 1 for creating marginal proportional tables
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),1)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),2)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),3)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),4)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),5)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),6)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),7)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),8)
+```
+
+```{r}
+#{r, attach=loan}
+# Option 1 for creating marginal proportional tables
+#margin.table(prop.table(table(Duration.in.Current.address)), 1)
+prop.table(table(Duration.in.Current.address))
+prop.table(table(Most.valuable.available.asset))
+prop.table(table(Concurrent.Credits))
+prop.table(table(No.of.Credits.at.this.Bank))
+prop.table(table(Occupation))
+prop.table(table(Telephone))
+prop.table(table(Foreign.Worker))
+prop.table(table(loan$Duration.of.Credit..month.))
+```
+
+# Correlation matrix plot: This graphic/plot is used to check the correlation between the variables and can be use for feature selection 
+```{r}
+library(GGally)
+ggcorr(loan)
+```
+
+# Creating K1 x K2 contingency table.
+
+# Cross-tabulation of the 9 predictors as defined above with Creditability is shown below. 
+# The proportions shown in the cells are column proportions and so are the marginal proportions. For example, 30% of 1000 applicants have no account and another 30% have no balance while 40% have some balance in their account. Among those who have no account 135 are found to be npn-Creditable and 139 are found to be Creditable. In the group with no balance in their account, 40% were found to be non-Creditable whereas in the group having some balance only 1% are found to be Non-Creditable.
+
+# Note: The feature that has p-value <0.05 are not selected as feature for model because it shows there is no significant relationship with "Creditability"(target)
+
+```{r}
+#{r, attach=loan}
+library(gmodels)
+
+CrossTable(loan$Creditability, loan$Account.Balance, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+CrossTable(loan$Creditability, loan$Payment.Status.of.Previous.Credit, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+CrossTable(loan$Creditability, loan$Purpose, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+
+CrossTable(loan$Creditability,loan$Value.Savings.Stocks, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+CrossTable(loan$Creditability, loan$Length.of.current.employment, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+CrossTable(loan$Creditability, loan$Sex...Marital.Status, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+
+CrossTable(loan$Creditability, loan$No.of.Credits.at.this.Bank, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+CrossTable(loan$Creditability, loan$Guarantors, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+CrossTable(loan$Creditability,loan$ Concurrent.Credits, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+
+CrossTable(loan$Creditability,loan$Type.of.apartment, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+CrossTable(loan$Creditability,loan$No.of.dependents, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+CrossTable(loan$Creditability,loan$Instalment.per.cent, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+
+
+```
+
+# Summary and Feature selection for continuous variable:
+
+# Feature selection for continuous variable
+
+# All the three variables show marked positive skewness. Boxplots bear this out even more clearly (If you turn the boxplot clockwise you will have more values on the positive ot right side i.e. called skew to the right)
+
+```{r}
+#{r, attach=loan}
+par(mfrow=c(2,3) )
+
+# Summary of the continuous variables
+summary(Duration.of.Credit..month.) # Summary statistics are printed for this variable
+summary(Credit.Amount)
+summary(Age..years.)
+
+# Distribution of the continuous variables:
+brksCredit <- seq(0, 80, 10) # Bins for a nice looking histogram
+hist(Duration.of.Credit..month., breaks=brksCredit, xlab = "Credit Month", ylab = "Frequency", main = " ", cex=0.4) # produces nice looking histogram
+#hist(Credit.Amount, breaks=brksCredit, xlab = "Credit Amount", ylab = "Frequency", main = " ", cex=0.4)
+hist(Age..years., breaks=brksCredit, xlab = "Age in Years", ylab = "Frequency", main = " ", cex=0.4)
+
+boxplot(Duration.of.Credit..month., bty="n",xlab = "Credit Month", cex=0.4) # For boxplot
+boxplot(Credit.Amount, bty="n",xlab = "Credit Amount", cex=0.4)
+boxplot(loan$Age..years., bty="n",xlab = "Age in Years", cex=0.4)
+
+```
+
+# Using t-test to confirm the relationship between categorical variable (Creditability) and the continuous variables (Age,Credit amount, and Duration in month)
+
+# The t-test is used to confirm if there is a significant relationship btw categorical and continuous variables based on the p-value. If the p-value<0.05 then the null hypothesis is rejected which shows relationship btw them otherwise no relationship btw them. For example in the case of 'Creditability' and 'Age' the p-value = 0.003778 which shows that there is significant difference in the means of Creditworthy(1) and non-creditworthy(0). Since there is difference in their means then there is relationship btw Credibility and Age and this is also being confirmed by the boxplot.
+
+# mean in group 0 - 33.96           
+# mean in group 1 - 36.22
+
+# Only significant (i.e. with p-value<0.05) predictors (both categorical and continuous) are to be included in the logistic regression model or other model you want to build.
+```{r}
+#{r, attach=loan}
+# loan$Creditability <- as.factor(loan$Creditability) # optional
+# t-test btw loan$Age..years. and loan$Creditability
+t.test(loan$Age..years.~Creditability, alternative="two.sided" )
+
+# Boxplot to confirm the t-test result
+boxplot(loan$Age..years.~Creditability)
+```
+
+```{r}
+#{r, attach=loan}
+t.test(Duration.of.Credit..month.~Creditability, alternative="two.sided" )
+
+# Boxplot to confirm the t-test result
+boxplot(Duration.of.Credit..month.~Creditability)
+```
+
+```{r}
+#{r, attach=loan}
+t.test(Credit.Amount~Creditability, alternative="two.sided" )
+
+# Boxplot to confirm the t-test result
+boxplot(Credit.Amount ~Creditability)
+
+```
+
+```{r}
+indexes = sample(1:nrow(loan), size=0.5*nrow(loan)) # Random sample of 50% of row numbers created
+Train50 <- loan[indexes,] # Training data contains created indices
+Test50 <- loan[-indexes,] # Test data contains the rest
+# Using any proportion, other than 0.5 above and size Training and Test data can be constructed
+
+```
+
+```{r}
+sapply(Test50, function(x) sum(is.na(x)))
+
+```
+
+```{r}
+#{r, attach=loan}
+LogisticModel50 <- glm(Creditability ~ Account.Balance + Payment.Status.of.Previous.Credit + Purpose + Value.Savings.Stocks + Length.of.current.employment + Sex...Marital.Status + Most.valuable.available.asset + Type.of.apartment + Concurrent.Credits + Duration.of.Credit..month.+ Credit.Amount + Age..years., family=binomial, data = Train50)
+
+LogisticModel50final <- glm(Creditability ~ Account.Balance + Payment.Status.of.Previous.Credit + Purpose + Length.of.current.employment + Sex...Marital.Status, family=binomial, data = Train50)
+
+pred1 <- predict(LogisticModel50final, Test50$Creditability )
+df <- data.frame(pred1, Test50$Creditability)
+
+pred <- prediction(df$pred1, df$Test50.Creditability )
+
+fit50 <- fitted.values(LogisticModel50)
+Threshold50 <- rep(0,500)
+for (i in 1:500)
+if(fit50[i] >= 0.5) Threshold50[i] <- 1
+CrossTable(Train50$Creditability, Threshold50, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=F, data=Train50)
+
+
+
+library(ROCR)
+
+
+perf <- performance(pred, "tpr", "fpr")
+plot(perf)
+
+```
+
+
+
+```{r}
+
+
+```
+
+
+```{r}
+
+
+```
+

@@ -1,0 +1,2 @@
+"0","#Testing the model"
+"0","pred <- predict(object=tree,mushrooms_test[-1],type=""class"")"

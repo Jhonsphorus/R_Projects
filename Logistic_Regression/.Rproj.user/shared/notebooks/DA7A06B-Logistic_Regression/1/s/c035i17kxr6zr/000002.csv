@@ -1,0 +1,4 @@
+"0","pred2 <- predict(logis2,testData)"
+"0","logisDf2 <- data.frame(testData$Class,pred2)"
+"0","View(logisDf2)"
+"0",""

@@ -1,0 +1,7 @@
+"0","  "
+"0",""
+"0","cl <- kmeans(smple_matrix,3,nstart=25)"
+"0",""
+"0","# You can plot the graph and cluster centroid using the following command."
+"0",""
+"0","plot(smple_matrix, col =(cl$cluster+1) , main=""k-means result with 2 clusters"", pch=1, cex=1, las=1)"

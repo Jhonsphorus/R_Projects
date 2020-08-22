@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1592096485254.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "344304794",
+    "id" : "5ECE7DDF",
+    "lastKnownWriteTime" : 1592096868,
+    "last_content_update" : 1592096868980,
+    "path" : "~/RProject/Personal_Practice_New/Africa_Colonization/Knit1.Rmd",
+    "project_path" : "Knit1.Rmd",
+    "properties" : {
+        "cursorPosition" : "2,25",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

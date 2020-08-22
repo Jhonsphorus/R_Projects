@@ -1,0 +1,227 @@
+---
+title: "LinearRegression3_180820"
+author: "Johnson Adebayo"
+date: "8/18/2020"
+output: html_document
+---
+
+# http://r-statistics.co/Linear-Regression.html
+
+# Step 1: Loading dataset
+```{r}
+library(datasets)
+#data("cars")
+cars1 <- cars
+```
+
+```{r}
+head(cars1)
+```
+
+# Step 2: EDA
+
+## Scatter Plot: To check the relationship between dist and speed
+```{r}
+scatter.smooth(x=cars1$speed, y=cars1$dist, main = "Plot of Distance Vs Speed", ylab ="Stopping Distance", xlab ="Speed")
+```
+
+## Box Plot: To check for outliers in the variables
+```{r}
+par(mfrow=c(1, 2))  # divide graph area in 2 columns
+boxplot(cars1$speed, main="Speed", sub=paste("Outlier rows: ", boxplot.stats(cars1$speed)$out))  # box plot for 'speed'
+boxplot(cars1$dist, main="Distance", sub=paste("Outlier rows: ", boxplot.stats(cars1$dist)$out))  # box plot for 'distance'
+```
+
+
+## Density Plot: Check if the response variable is close to normality
+
+## To see the distribution of the predictor variable. Ideally, a close to normal distribution (a bell shaped curve), without being skewed to the left or right is preferred
+
+```{r}
+library(e1071)
+par(mfrow=c(1, 2))  # divide graph area in 2 columns
+plot(density(cars$speed), main="Density Plot: Speed", ylab="Frequency", sub=paste("Skewness:", round(e1071::skewness(cars$speed), 2)))  # density plot for 'speed'
+polygon(density(cars$speed), col="red")
+
+plot(density(cars$dist), main="Density Plot: Distance", ylab="Frequency", sub=paste("Skewness:", round(e1071::skewness(cars$dist), 2)))  # density plot for 'dist'
+polygon(density(cars$dist), col="red")
+
+```
+
+
+# Step 3: Create the training (development) and test (validation) data samples from original data
+```{r}
+# Create Training and Test data -
+set.seed(100)  # setting seed to reproduce results of random sampling
+trainingRowIndex <- sample(1:nrow(cars1), 0.8*nrow(cars1))  # row indices for training data
+trainingData <- cars1[trainingRowIndex, ]  # model training data
+testData  <- cars1[-trainingRowIndex, ]   # test data
+
+```
+
+```{r}
+nrow(trainingData)
+nrow(testData)
+```
+
+# Step 4: Develop the model on the training data and use it to predict the distance on test data
+```{r}
+# Build the model on training data -
+lmMod <- lm(dist ~ speed, data=trainingData)  # build the model
+distPred <- predict(lmMod, testData)  # predict distance
+```
+
+```{r}
+distPred
+
+```
+
+# Step 5: Review diagnostic measures.
+
+## From the model summary, the model p value and predictor’s p value are less than the significance level, so we know we have a statistically significant model. Also, the R-Sq and Adj R-Sq are comparative to the original model built on full data.
+```{r}
+summary(lmMod)
+```
+
+# Step 5: Calculate prediction accuracy and error rates
+
+## A simple correlation between the actuals and predicted values can be used as a form of accuracy measure. A higher correlation accuracy implies that the actuals and predicted values have similar directional movement, i.e. when the actuals values increase the predicteds also increase and vice-versa.
+
+```{r}
+
+actuals_preds <- data.frame(cbind(actuals=testData$dist, predicteds=distPred))  # make actuals_predicteds dataframe.
+correlation_accuracy <- cor(actuals_preds)  # 90.3%
+# cor(testData$dist, distPred) # Alternative for checking correlation btw actual and predicted
+correlation_accuracy
+head(actuals_preds)
+
+```
+
+
+## Mean Absolute Percentage Error (MAPE)
+```{r}
+min_max_accuracy <- mean(apply(actuals_preds, 1, min) / apply(actuals_preds, 1, max))  
+# => 73.11%, min_max accuracy
+mape <- mean(abs((actuals_preds$predicteds - actuals_preds$actuals))/actuals_preds$actuals)  
+# => 49.60%, mean absolute percentage deviation
+
+mape2 <- (mean(abs((actuals_preds$predicteds - actuals_preds$actuals))/actuals_preds$actuals))*100
+
+min_max_accuracy
+mape
+mape2
+```
+
+## Error Metrics: Alternately, you can compute all the error metrics in one go using the regr.eval() function in DMwR package. You will have to install.packages('DMwR') for this if you are using it for the first time.
+```{r}
+DMwR::regr.eval(actuals_preds$actuals, actuals_preds$predicteds)
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+
+

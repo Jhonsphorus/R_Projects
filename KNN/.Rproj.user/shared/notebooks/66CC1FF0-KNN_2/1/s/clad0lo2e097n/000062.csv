@@ -1,0 +1,2 @@
+"0","#hist(Credit.Amount, breaks=brksCredit, xlab = ""Credit Amount"", ylab = ""Frequency"", main = "" "", cex=0.4)"
+"0","hist(Age..years., breaks=brksCredit, xlab = ""Age in Years"", ylab = ""Frequency"", main = "" "", cex=0.4)"

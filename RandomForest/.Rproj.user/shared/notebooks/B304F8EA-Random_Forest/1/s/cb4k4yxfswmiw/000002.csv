@@ -1,0 +1,4 @@
+"0","control <- trainControl(method = 'cv', number = 10)"
+"0","set.seed(2)"
+"0","model <- train(Survived~ticket_class+sex+Siblings_spouses+embarked+Parchil+fare,data = train, method = 'rf',trControl = control)"
+"0",""

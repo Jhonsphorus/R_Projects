@@ -1,0 +1,5 @@
+"0","dispCoef <- modelCoef[""disp"",""Estimate""]"
+"0","hpCoef <- modelCoef[""hp"",""Estimate""]"
+"0","wtCoef <- modelCoef[""wt"",""Estimate""]"
+"0",""
+"0",""

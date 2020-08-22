@@ -1,0 +1,7 @@
+"0","# Give the chart file a name."
+"0","#png(file = ""linearregression2.png"")"
+"0","#png(file = ""linearregression2.jpg"")"
+"0",""
+"0","# Plot the chart."
+"0","plot(y =y,x = x,col = ""blue"",main = ""Height & Weight Regression"","
+"0","abline(lm(y~x)),cex = 1.5,pch = 16,ylab = ""Weight in Kg"",xlab = ""Height in cm"")"

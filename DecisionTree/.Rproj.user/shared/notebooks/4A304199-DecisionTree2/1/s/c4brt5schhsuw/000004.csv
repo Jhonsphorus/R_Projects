@@ -1,0 +1,4 @@
+"0","# pred <- predict(DT_model,test_mushroom[,-1]) # I'm removing the column of the response variable so that the model does not see the column while predicting"
+"0",""
+"0","pred <- predict(DT_model,test_mushroom)"
+"0",""

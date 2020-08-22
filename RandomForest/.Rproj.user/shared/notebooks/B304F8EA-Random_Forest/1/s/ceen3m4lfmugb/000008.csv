@@ -1,0 +1,3 @@
+"0","survival_table <- data.frame(test$traveller_ID,test$name,test$sex, survival_pred)"
+"0","colnames(survival_table) <- c(""TravellerID"",""Name"",""Sex"",""Survival_Prediction"")"
+"0","View(survival_table)"

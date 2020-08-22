@@ -1,0 +1,98 @@
+
+
+library(shiny)
+library(shinythemes)
+
+movies2 <- read.csv("movies.csv", header = TRUE, stringsAsFactors=FALSE)
+
+shinyUI(fluidPage(theme = shinytheme("sandstone"),
+    
+    # Application title
+    tags$h1(style="color:#210B61", tags$b("PhorusRecommender"),align='center'),
+    #titlePanel("Loan Risk Analysis Platform"),
+    tags$hr(),
+    
+    tags$h4(style="color:#210B61",tags$b("PhorusRecommender is a platform that recommends ten other movies based on three movies 
+                                            selected and rated by the users"),align='center'),
+    tags$hr(),
+    
+    # Panel heading
+    tags$h4(tags$b("Movies Selection Panel"),style="color:#088A68"),
+    
+    # Sidebar with a numeric input, select input and action button for obtaining user's input
+    sidebarLayout(
+        sidebarPanel(
+            selectInput("select1", label = "Select First Movie",
+                        choices = as.character(movies2$title[1:9742])),
+            numericInput("rating1", label ="Rate First Movie",value = 1, min = 1, max = 5 ),
+            
+            selectInput("select2", label ="Select Second Movie",
+                        choices = as.character(movies2$title[1:9742])),
+            numericInput("rating2", label ="Rate Second Movie",value = 1, min = 1, max = 5 ),
+            
+            
+            selectInput("select3", label ="Select Third Movie",
+                        choices = as.character(movies2$title[1:9742])),
+            numericInput("rating3", label ="Rate Third Movie",value = 1, min = 1, max = 5 ),
+            
+            submitButton("Submit")                                                            
+            
+        ),
+        
+        # Creating object of the outputs
+        mainPanel(
+            
+            #fluidRow(tags$b("You Might Like to Buy These Movies Too!"),
+                     #tableOutput("table"))  
+            tags$b(h3("You Might Like to Buy These Movies Too!")),
+            tableOutput("table")
+        
+        )
+    )
+)
+)
+        
+        # Creating object of the outputs
+        mainPanel(
+            h3("You Might Like to Buy These Movies Too!"),
+               tableOutput("table"))
+            
+            
+        )
+    )
+)
+
+.....................................................................................................................................................
+
+library(shiny)
+
+movies2 <- read.csv("movies.csv", header = TRUE, stringsAsFactors=FALSE)
+
+shinyUI(fluidPage(
+    titlePanel("Phorus Movie Recommendation Engine"),
+    fluidRow(
+        column(5,
+               
+               selectInput("select1", label = "Select First Movie",
+                           choices = as.character(movies2$title[1:9742])),
+               numericInput("rating1", label ="Rate First Movie",value = 1, min = 1, max = 5 ),
+               
+               selectInput("select2", label ="Select Second Movie",
+                           choices = as.character(movies2$title[1:9742])),
+               numericInput("rating2", label ="Rate Second Movie",value = 1, min = 1, max = 5 ),
+               
+               
+               selectInput("select3", label ="Select Third Movie",
+                           choices = as.character(movies2$title[1:9742])),
+               numericInput("rating3", label ="Rate Third Movie",value = 1, min = 1, max = 5 ),
+               
+               submitButton("Submit")
+               
+        ),
+        
+        column(7,
+               h3("You Might Like to Buy These Movies Too!"),
+               tableOutput("table"))
+    )
+))
+

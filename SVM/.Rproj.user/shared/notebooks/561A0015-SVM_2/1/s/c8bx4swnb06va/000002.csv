@@ -1,0 +1,2 @@
+"0","svm_linear <- train(target~., data = training, method = ""svmLinear"", preProcess=c(""center"",""scale""), trControl =trctrl, tuneLength=10 )"
+"0",""

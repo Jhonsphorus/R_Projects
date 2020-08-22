@@ -1,0 +1,3 @@
+"0","lm_pred <- predict(linear_model, cars)"
+"0","df_lm <- data.frame(cars$dist,lm_pred)"
+"0","View(df_lm)"

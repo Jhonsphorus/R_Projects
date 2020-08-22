@@ -1,0 +1,2 @@
+"0","smple <- movie[sample(nrow(movie),500),]"
+"0",""

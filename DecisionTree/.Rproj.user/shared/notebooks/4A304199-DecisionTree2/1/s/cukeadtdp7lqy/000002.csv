@@ -1,0 +1,4 @@
+"0","set.seed(100)"
+"0","train_test <- initial_split(mushrooms, p=0.8)"
+"0","train_mushroom <- training(train_test)"
+"0","test_mushroom <- testing(train_test)"

@@ -1,0 +1,164 @@
+---
+title: "Population of States in Nigeria"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    social: menu
+    source_code: embed
+    
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+library(ggplot2)
+library(ggpubr)
+```
+
+```{r}
+nig_pop <- read.csv("nigeria-population-by-state.csv")
+nig_pop2 <- read.csv("nigeria-population-by-state.csv", row.names = 1)
+#View(nig_pop)
+```
+
+
+Sidebar {.sidebar}
+=====================================
+
+### Data Selection
+```{r}
+selectInput("state","Select State",choices =nig_pop$State, multiple = FALSE )
+renderText({
+  
+  paste(input$state, "Population is: ", nig_pop[nig_pop$State==input$state,2])
+  
+})
+
+```
+
+
+Population Gauge
+=============================================================================
+
+Column 1
+----------------------------------------------------------------------------
+
+### Population of State in Number
+```{r}
+#Population Gauge{data-navmenu="Menu"} # to used the navbar as a "menu"
+
+#rate <- computeContactRate()
+renderGauge({
+  #if(input$submit>0){
+    
+    gauge(nig_pop[nig_pop$State==input$state,2] , min = 0, max =20000000,label= "Population",gaugeSectors(success = c(1,9999999), warning = c(10000000,15000000), danger = c(15000001, 20000000)))
+    
+ # }
+  
+  
+})
+
+```
+
+Column 2
+----------------------------------------------------------------------------
+
+### Population of State in Percentage
+```{r}
+#rate <- computeContactRate()
+renderGauge({
+  #if(input$submit>0){
+    
+    gauge(round(((nig_pop[nig_pop$State==input$state,2]/sum(nig_pop$Population))*100),digits = 1) , min = 0, max =100,label= "% Population",gaugeSectors(success = c(0,50), warning = c(51,70), danger = c(71, 100)))
+    
+ # }
+  
+  
+})
+
+```
+
+Population Barchart 
+======================================================================================
+
+Column 1
+----------------------------------------------------------------------------
+
+### Barchart of States in Nigeria
+Data Source : https://open.africa/dataset/population
+
+
+```{r}
+# Population Barchart {data-navmenu="Menu"} to used the navbar as a "menu"
+
+renderPlot({
+  # For barchart
+  q = ggbarplot(nig_pop, y="Population",x="State",fill = "State",color ="white",ggtheme = theme_gray())
+  
+  ggpar(q, x.text.angle=90, legend = "none")
+  
+  
+})
+
+```
+
+
+Doughnutchart of States in Nigeria 
+======================================================================================
+
+### Population Doughnutchart
+
+```{r}
+#Doughnutchart of States in Nigeria {data-navmenu="Menu"}
+
+renderPlot({
+  # For adding percentage of each values
+  #labs <- paste0(nig_pop$State, " (", (nig_pop$Population/sum(nig_pop$Population))*100, "%)")
+  p = ggdonutchart(nig_pop, "Population","State",fill = "State",color ="white",ggtheme = theme_gray(),lab.pos="in" )
+  #ggdonutchart(nig_pop, "Population",label = labs,fill = "State",color ="white")
+  
+  ggpar(p, legend = "none")
+})
+
+```
+
+
+Piechart of States in Nigeria 
+======================================================================================
+
+
+### Population Piechart Plot
+
+```{r}
+# Piechart of States in Nigeria {data-navmenu="Menu"}
+
+renderPlot({
+  # For Pie chart
+  ggpie(nig_pop, "Population","State",fill = "State",color ="white",ggtheme = theme_gray())
+  
+})
+
+```
+
+
+Ballonchart of States in Nigeria 
+======================================================================================
+
+### Population Piechart Plot
+
+```{r}
+renderPlot({
+  
+  ggballoonplot(nig_pop2,ggtheme = theme_classic(), fill = "red")
+  
+})
+
+```
+
+
+
+```{r}
+#rmarkdown::run("Nigeria_Population2.Rmd")
+```

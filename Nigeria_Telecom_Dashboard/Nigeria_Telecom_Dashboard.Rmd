@@ -1,0 +1,626 @@
+---
+title: "Nigeria Telecommuication Analysis"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    social: menu
+    source_code: embed
+    logo: logo3.png
+    theme: cerulean
+    storyboard: TRUE
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+library(shinythemes)
+library(ggplot2)
+library(ggpubr)
+library(knitr)
+library(readxl)
+library(tidyverse)
+library(DT)
+#library(httr)
+library(googledrive)
+library(gargle)
+library(jsonlite)
+
+```
+
+
+```{r}
+# Reading subscription data
+marketShare <- read.csv("Percentage Market Share(GSM).csv")
+sub_OperatorGSM <- read.csv("SubscriberByOperator(GSM).csv")
+sub_OperatorCDMA <- read.csv("SubscriberByOperator(CDMA).csv")
+sub_OperatorFixedWireless <- read.csv("SubscriberByOperator(FixedWireless2).csv")
+sub_OperatorFixedWired <- read.csv("SubscriberByOperator(FixedWired).csv")
+sub_OperatorVOIP <- read.csv("SubscriberByOperator(VoIP).csv")
+marketShareTech <- read.csv("PercentageMarketShare(Technology).csv")
+marketShareTech2 <- read.csv("PercentageMarketShare(Technology2).csv")
+
+# Reading internet dataset
+subInternetTECH <- read.csv("Active Internet Subscriber by Technology (August 2018-March 2020).csv")
+subInternetGSM <- read.csv("Internet Subscribe Data(GSM).csv")
+subInternetCDMA <- read.csv("Internet Subscribe Data(CDMA).csv")
+subInternetFixedWired <- read.csv("Internet Subscribe Data(FixedWired).csv")
+subInternetVOIP <- read.csv("Internet Subscribe Data(VoIP).csv")
+
+# reading data from Subscriber Statistics 
+subMonthlyTech <- read.csv("MonthlySubscriberTechnologyData.csv")
+internetServiceOperators <- read.csv("InternetServiceOperatorData.csv")
+QuarterlySubscriberOperatorData <- read.csv("QuarterlySubscriberOperatorData.csv")
+annualSubscriber <- read.csv("AnnualSubscriberTechnologyData.csv")
+
+#View(annualSubscriber)
+#View(QuarterlySubscriberOperatorData)
+#View(internetServiceOperators)
+#View(subMonthlyTech)
+#View(subInternetVOIP)
+#View(subInternetFixedWired)
+#View(subInternetCDMA)
+#View(subInternetGSM)
+#View(subInternetTECH)
+#View(marketShareTech)
+#View(sub_OperatorVOIP)
+#View(sub_OperatorCDMA)
+#View(sub_OperatorFixedWired)
+#View(sub_OperatorFixedWireless)
+#View(marketShare)
+#View(marketShare)
+#View(sub_OperatorGSM)
+#sub_OperatorGSM3 <- sub_OperatorGSM[-(sub_OperatorGSM$Operator=="Total"),]
+
+```
+
+```{r}
+sub_OperatorGSM3 <- sub_OperatorGSM[-6,]
+sub_OperatorCDMA3 <- sub_OperatorCDMA[-3,]
+sub_OperatorFixedWireless3 <- sub_OperatorFixedWireless[-3,]
+sub_OperatorFixedWired3 <- sub_OperatorFixedWired[-5,]
+sub_OperatorVOIP3 <- sub_OperatorVOIP[-3,]
+
+subInternetTECH3 <- subInternetTECH[-5,]
+subInternetGSM3 <- subInternetGSM[-6,]
+subInternetCDMA3 <- subInternetCDMA[-3,]
+subInternetFixedWired3 <- subInternetFixedWired[-4,]
+subInternetVOIP3 <- subInternetVOIP[-3,]
+
+#View(subInternetVOIP3)
+#View(subInternetFixedWired3)
+#View(subInternetCDMA3)
+#View(subInternetGSM3)
+#View(subInternetTECH3)
+#View(sub_OperatorVOIP3)
+#View(sub_OperatorFixedWired3)
+#View(sub_OperatorFixedWireless3)
+#View(sub_OperatorGSM3)
+#View(sub_OperatorCDMA3)
+
+```
+
+```{r}
+
+sub_OperatorGSM2 <- sub_OperatorGSM3 %>% gather("May.14":"Mar.20",key = "Date", value = "NumberOfSubscribers")
+
+sub_OperatorCDMA2 <- sub_OperatorCDMA3 %>% gather("May.14":"Dec.19",key = "Date", value = "NumberOfSubscribers")
+
+sub_OperatorFixedWireless2 <- sub_OperatorFixedWireless3 %>% gather("May.14":"Dec.19",key = "Date", value = "NumberOfSubscribers")
+
+sub_OperatorFixedWired2 <- sub_OperatorFixedWired3 %>% gather("May.14":"Mar.20",key = "Date", value = "NumberOfSubscribers")
+
+sub_OperatorVOIP2 <- sub_OperatorVOIP3 %>% gather("Jul.16":"Mar.20",key = "Date", value = "NumberOfSubscribers")
+
+subInternetTECH2 <- subInternetTECH3 %>% gather("Aug.18":"Apr.20",key = "Date", value = "NumberOfSubscribers")
+
+subInternetGSM2 <- subInternetGSM3 %>% gather("Sep.12":"Apr.20",key = "Date", value = "NumberOfSubscribers")
+
+subInternetCDMA2 <- subInternetCDMA3 %>% gather("Jan.15":"Dec.19",key = "Date", value = "NumberOfSubscribers")
+
+subInternetFixedWired2 <- subInternetFixedWired3 %>% gather("Jan.17":"Apr.20",key = "Date", value = "NumberOfSubscribers")
+
+subInternetVOIP2 <- subInternetVOIP3 %>% gather("Jan.17":"Apr.20",key = "Date", value = "NumberOfSubscribers")
+
+#View(subInternetVOIP2)
+#View(subInternetFixedWired2)
+#View(subInternetCDMA2)
+#View(subInternetGSM2)
+#View(subInternetTECH2)
+#View(sub_OperatorVOIP2)
+#View(sub_OperatorFixedWired2)
+#View(sub_OperatorFixedWireless2)
+#View(sub_OperatorCDMA2)
+#View(sub_OperatorGSM2)
+```
+
+
+```{r}
+# For user to select choice of theme
+renderUI({themeSelector()})
+```
+
+About{data-navmenu=""}
+===============================================================================
+**ABOUT**
+
+*This is an analysis platform built for analysing data of telecomminication industry in Nigeria. The data used for the analysis and various charts plotted on this platform was obtained from the website of Nigerian Communication Commission (NCC) -  https://www.ncc.gov.ng *
+
+*The essence of this project are as follows; *
+
+
+* *To showcase my ability of using both Flexdashboard and shiny package in R.*
+* *To communicate dataset of Nigeria telecom industry using charts.*
+* *To identify meaningful trends from the dataset.*
+
+
+Subscriber / Operator Data {.storyboard data-navmenu="Industry Statistics"}
+===============================================================================
+
+## Subscriber / Operator Data Sidebar {.sidebar data-width=250}
+
+**Industry Statistics**
+
+*This section contains analysis of Subscriber/Operator Data, Percentage Market Share by Technology and Internet Subscriber Data of telecommunication industry in Nigeria. The data used for this analysis is obtained from the website of Nigeria Communication Commission (NCC) - https://www.ncc.gov.ng *
+
+
+**Subscriber / Operator Data**
+
+*This storyboard contains analysis and charts on technologies such as GSM, CDMA, Fixed Wireless and Fixed Wired (i.e. Landline) and VoIP.*
+
+### Percentage Market Share (GSM)
+
+
+```{r}
+renderPlot({
+  
+  ggdonutchart(data=marketShare, x="No.of.Subscribers",label ="Percentage" , fill = "Operator", lab.pos="in", ggtheme = theme_gray(),lab.adjust=20,main="% MARKET SHARE BY OPERATORS (GSM) - (March 2020)",palette = c("#00802b","#ff0000","#33ff33","Yellow","#ff3333"))
+  
+  
+  #ggpie(data=marketShare, x="No.of.Subscribers",label ="Percentage" , fill = "Operator", lab.pos="in", ggtheme = theme_gray(),lab.adjust=20,main="% Market Share by Operators (GSM) - March 2020",palette = c("#00802b","#ff0000","#33ff33","Yellow","#ff3333"))
+  
+  #ggpar(pie_p,legend="top")
+})
+
+```
+
+
+```{r}
+
+renderTable({
+  
+  marketShare
+  
+})
+
+```
+
+### GSM
+
+
+```{r}
+renderPlot({
+  
+  sub_line <- ggline(data = sub_OperatorGSM2[296:355 , ], x= "Date", y= "NumberOfSubscribers", group="Operator", palette = c("#00802b","#ff0000","#33ff33","Yellow","#ff3333"), color="Operator", linetype = "solid",main="SUBSCRIBER BY OPERATOR (GSM) - (APRIL 2019 - MARCH 2020)",xlab ="MONTHS",ylab = "NUMBER OF SUBSCRIBERS")
+  
+  ggpar(sub_line, ggtheme = theme_gray() )
+})
+```
+
+
+```{r}
+# Displaying the table of Percentage Market Share(GSM).csv
+renderTable({
+  
+  sub_OperatorGSM
+})
+
+```
+
+### CDMA
+
+```{r}
+renderPlot({
+  
+  lineCDMA <- ggline(data = sub_OperatorCDMA2[113:136 , ], x= "Date", y= "NumberOfSubscribers", group="Operator", palette = c( "#3333ff","#ff3333"), color="Operator", linetype = "solid",main="SUBSCRIBER BY OPERATOR (CDMA) - (JAN 2019 - DEC 2019)",xlab ="MONTHS",ylab = "NUMBER OF SUBSCRIBERS")
+
+  #ggline(data = sub_OperatorCDMA2[113:136 , ], x= "Date", y= "NumberOfSubscribers", group="Operator", palette = c( "#3333ff","#ff3333"), color="Operator", linetype = "solid", ggtheme=theme_gray(),x.text.angle=90)
+
+  ggpar(lineCDMA, ggtheme=theme_gray(), x.text.angle=90)
+  
+})
+
+```
+
+
+```{r}
+# Displaying the table of SubscriberByOperator(GSM).csv
+renderTable ({
+  
+  sub_OperatorCDMA
+})
+
+```
+
+### Fixed Wireless
+
+```{r}
+
+renderPlot({
+  ggline(data = sub_OperatorFixedWireless2[113:134 , ], x= "Date", y= "NumberOfSubscribers", group="Operator", palette = c( "#3333ff","#ff3333"), color="Operator", linetype = "solid", ggtheme=theme_gray(),x.text.angle=90,main="SUBSCRIBER BY OPERATOR (Fixed Wireless) - (FEB 2019 - DEC 2019)",xlab ="MONTHS",ylab = "NUMBER OF SUBSCRIBERS")
+  
+})
+```
+
+
+```{r}
+# Displaying the table of SubscriberByOperator(GSM).csv
+renderTable ({
+  
+  sub_OperatorFixedWireless
+})
+
+```
+
+### Fixed Wired
+
+```{r}
+renderPlot({
+  ggline(data = sub_OperatorFixedWired2[225:284, ], x= "Date", y= "NumberOfSubscribers", group="Operator", palette = c("#ff00ff","#00ff00","#990000","#ffff00"), color="Operator", linetype = "solid", ggtheme=theme_gray(),x.text.angle=90,main="SUBSCRIBER BY OPERATOR (Fixed Wired) - (JAN 2019 - MARCH 2020)",xlab ="MONTHS",ylab = "NUMBER OF SUBSCRIBERS")
+
+})
+
+```
+
+```{r}
+# Displaying the table of SubscriberByOperator(FixedWired).csv
+renderTable ({
+  
+  sub_OperatorFixedWired
+})
+
+```
+
+### VoIP
+
+```{r}
+renderPlot({
+  ggline(data = sub_OperatorVOIP2[67:90, ], x= "Date", y= "NumberOfSubscribers", group="Operator", palette = c("#cc0099","#009933"), color="Operator", linetype = "solid",xlab ="MONTHS",ylab = "NUMBER OF SUBSCRIBERS",ggtheme=theme_gray(),x.text.angle=90,main="SUBSCRIBER BY OPERATOR (VoIP) - (APRIL 2019 - MARCH 2020)")
+
+})
+
+```
+
+
+```{r}
+# Displaying the table of SubscriberByOperator(FixedWired).csv
+renderTable ({
+  
+  sub_OperatorVOIP
+})
+
+
+```
+
+Internet Subscriber Data {.storyboard data-navmenu="Industry Statistics"}
+===============================================================================
+
+## Internet Subscriber Data Sidebar {.sidebar data-width=250}
+
+
+**Industry Statistics**
+
+*This section contains analysis of Subscriber/Operator Data, Percentage Market Share by Technology and Internet Subscriber Data of telecommunication industry in Nigeria. The data used for this analysis is obtained from the website of Nigeria Communication Commission (NCC) - https://www.ncc.gov.ng *
+
+
+
+**Internet Subscriber Data** 
+
+*This storyboard contains charts plotted using information on the number of active subscribers for data (internet) services on each of the licensed service providers utilizing the different technologies, i.e. GSM, CDMA, Fixed Wired and VoIP.*
+
+### Total by Technology
+
+```{r}
+renderPlot({
+  
+  bar_total = ggbarplot(data =subInternetTECH2[37:84,], x="Date",y="NumberOfSubscribers",position = position_stack(),x.text.angle=90, fill = "Operator", color = "Operator", ggtheme = theme_gray(),palette = c("#ff884d","#33cc33","#3333ff","#cc0066"),xlab ="MONTHS",ylab = "NUMBER OF SUBSCRIBERS", main="ACTIVE INTERNET SUBSCRIPTION BY TECHNOLOGY (MAY 2019 - APRIL 2020)")
+
+  #ggplot(subInternetTECH2[33:80,],aes(x=Date,y="NumberOfSubscribers",fill=Operator)) +geom_col()
+
+  ggpar(bar_total)
+})
+```
+
+```{r}
+renderTable({
+  subInternetTECH
+  
+})
+
+```
+
+
+### GSM
+
+```{r}
+renderPlot({
+  
+  barInternetGSM = ggbarplot(data =subInternetGSM2[401:460,], x="Date",y="NumberOfSubscribers",position = position_stack(),x.text.angle=90, fill = "Operator", color = "Operator", ggtheme = theme_gray(),palette = c("#006600","#ff1a1a","#00ff00","#ffff00","#cc2900"),xlab ="MONTHS",ylab = "NUMBER OF SUBSCRIBERS", main="INTERNET SUBSCRIBER DATA (GSM) - (May 2019 - April 2020)")
+
+  ggpar(barInternetGSM)
+})
+
+```
+
+```{r}
+renderTable({
+  
+  subInternetGSM
+})
+
+```
+
+
+### CDMA
+
+```{r}
+renderPlot({
+  
+  barInternetCDMA = ggbarplot(data =subInternetCDMA2[97:120,],x="Date",y="NumberOfSubscribers",position = position_dodge(0.75),x.text.angle=90, fill = "Operator", color = "Operator", ggtheme = theme_gray(),xlab ="MONTHS",ylab = "NUMBER OF SUBSCRIBERS", main="INTERNET SUBSCRIBER DATA (CDMA) - (May 2019 - April 2020)")
+
+  ggpar(barInternetCDMA)
+})
+
+```
+
+```{r}
+renderTable({
+  
+  subInternetCDMA
+})
+
+```
+
+
+### Fixed Wired
+
+```{r}
+renderPlot({
+  
+  barInternetfixed = ggbarplot(data =subInternetFixedWired2[85:120,],x="Date",y="NumberOfSubscribers",position = position_stack(),x.text.angle=90, fill = "Operator", color = "Operator", ggtheme = theme_gray(),xlab ="MONTHS",ylab = "NUMBER OF SUBSCRIBERS", main="INTERNET SUBSCRIBER DATA (Fixed Wired) - (May 2019 - April 2020)",palette = c("#ff66cc","#990033","#ffff00"))
+
+  ggpar(barInternetfixed)
+})
+
+```
+
+```{r}
+renderTable({
+  
+  subInternetFixedWired
+})
+
+```
+
+### VoIP
+
+```{r}
+
+renderPlot({
+  
+  barInternetVOIP = ggbarplot(data=subInternetVOIP2[57:80,],x="Date",y="NumberOfSubscribers",position = position_stack(),x.text.angle=90, fill = "Operator", color = "Operator", ggtheme = theme_gray(),xlab ="MONTHS",ylab = "NUMBER OF SUBSCRIBERS", main="INTERNET SUBSCRIBER DATA (VoIP) - (May 2019 - April 2020)",palette = c("#ff6699","#00b359"))
+
+  ggpar(barInternetVOIP)
+})
+
+```
+
+
+
+```{r}
+renderTable({
+  
+  subInternetVOIP
+})
+
+```
+
+
+Percentage Market Share by Technology {.storyboard data-navmenu="Industry Statistics"}
+===============================================================================
+
+## Percentage Market Share by Technology Sidebar {.sidebar data-width=250}
+
+**Industry Statistics**
+
+*This section contains analysis of Subscriber/Operator Data, Percentage Market Share by Technology and Internet Subscriber Data of telecommunication industry in Nigeria. The data used for this analysis is obtained from the website of Nigeria Communication Commission (NCC) - https://www.ncc.gov.ng *
+
+**Percentage Market Share by Technology**
+
+*This display chart showing percentage of subscribers utilizing telecommunications services of the various technologies in Nigeria - i.e. GSM, CDMA and Fixed Wired/Wireless technology.*
+
+### Percentage Market Share by Technology 
+
+```{r}
+renderPlot({
+  ggbarplot(data=marketShareTech, y="Percentage",x ="Technology",  lab.pos="in",fill = "Technology", ggtheme = theme_gray(),lab.adjust=20,main="MARKET SHARE BY TECHNOLOGY (MARCH 2020)",palette = c("#e68a00","#004d00","#0000cc","#800000"), xlab = "TECHNOLOGY",ylab = "PERCENTAGE MARKET SHARE (%)")
+  
+  #ggplot(data=marketShareTech, aes(x=))
+  
+})
+
+
+
+```
+
+```{r}
+renderTable({
+  marketShareTech
+  
+})
+
+```
+
+
+Subscriber Data {.storyboard data-navmenu="Subscriber Statistics"}
+===============================================================================
+
+Subscriber Data Sidebar {.sidebar data-width=250}
+-------------------------------------------------------------------------------
+
+**Subscriber Statistics**
+
+*Click the links on this storyboard to display the number of subscribers for mobile and fixed telephony services on a monthly, quarterly and annual basis respectively.*
+
+### Monthly Subscriber Technology Data
+```{r}
+# Displaying the table "MonthlySubscriberTechnologyData.csv"
+
+submonth1 <- datatable(subMonthlyTech)
+
+renderDT({
+  
+  formatStyle(submonth1, columns = colnames(submonth1),target ='row',color ='red')
+  
+})
+```
+
+
+### Internet Service Operator Data 
+
+```{r}
+# Displaying the table "InternetServiceOperatorData.csv"
+internetServiceOperators2 <- datatable(internetServiceOperators)
+
+renderDT({
+  
+  internetServiceOperators2
+})
+
+```
+
+### Quarterly Subscriber Operator Data
+
+```{r}
+# Displaying the table "QuarterlySubscriberOperatorData.csv"
+QuarterlySubscriberOperatorData <- datatable(QuarterlySubscriberOperatorData)
+renderDT({
+  
+  QuarterlySubscriberOperatorData
+  
+})
+
+```
+
+
+### Annual Subscriber Technology Data
+
+```{r}
+annualSubscriber2 <- datatable(annualSubscriber)
+renderDT({
+  annualSubscriber2
+  
+})
+
+```
+
+Contact-us{.storyboard data-navmenu=""}
+===============================================================================
+ 
+Sidebar {.sidebar data-width=300}
+----------------------------------------------
+
+**Get in touch with us for your next analysis project**
+
+
+```{r}
+textInput(inputId ="name", label = "",placeholder = "Full Name*" )
+textInput("company", label = "",placeholder = "Company")
+textInput(inputId ="email", label = "",placeholder = "Email*" )
+textInput("phone",label="",placeholder = "Phone" )
+textInput(inputId ="subject", label = "",placeholder = "Subject*" )
+#textInput(inputId ="message", label = "",placeholder = "Message*" )
+textAreaInput(inputId ="message", label = "",placeholder = "Message*")
+actionButton("submit", "Submit") 
+#actionButton("clear","Clear")
+#submitButton("Submit")
+#tableOutput("table")
+
+
+
+```
+
+
+```{r}
+
+useroutput <- eventReactive(input$submit,{
+  if(input$name != "" & input$company!= "" & input$email!= "" & input$phone!= "" & input$subject != "" & input$message != ""  ){
+    userData <- data.frame(input$name,input$company,input$email,input$phone,input$subject,input$message)
+  }
+  return(userData)
+})
+
+```
+
+### Contact
+**email:** mailphorus@gmail.com
+
+```{r}
+img(src="twitter.png", height=20, width=20)
+
+```
+
+```{r}
+# Adding my twitter username
+
+renderText({
+  "@jhonsphorus"
+})
+
+```
+
+### 
+
+```{r}
+#userData <- read.csv("userentry.csv")
+
+
+renderTable({
+  
+  #userData <- rbind(userData, useroutput())
+  
+  # To remove the old "userentry.csv" file
+  #file.remove("userentry.csv")
+  # To write and replace the old "userentry.csv" file
+  #write.csv(userData,"userentry.csv", row.names = FALSE)
+  useroutput()
+})
+
+```
+
+```{r}
+
+
+#POST("https://drive.google.com/drive/u/1/my-drive",body =upload_file("C:/Users/usewr/Documents/RProject/Personal_Practice_New/Nigeria_Telecom_Dashboard/MonthlySubscriberTechnologyData.csv"),encode = "form" )
+
+
+```
+
+```{r}
+#drive_auth()
+#drive_find()
+# To post the data entered by the user into a spreadsheet called "USERDATA"
+
+#drive_auth(email = "mailjohnson.adebayo@gmail.com",scopes="https://www.googleapis.com/auth/drive.readonly")
+
+#drive_auth()  
+
+drive_put(media ="C:/Users/usewr/Documents/RProject/Personal_Practice_New/Nigeria_Telecom_Dashboard/userentry.csv",path = as_id("1G-TakNykaTlaeJtxFd9Q5xf98Bj3ihg4"),name ="USERDATA",type ="spreadsheet")
+
+```
+
+```{r}
+#rmarkdown::run("Nigeria_Telecom_Dashboard.Rmd")
+```
+

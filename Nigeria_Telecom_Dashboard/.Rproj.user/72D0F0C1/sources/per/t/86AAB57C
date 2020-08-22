@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591746790118.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "86AAB57C",
+    "lastKnownWriteTime" : 2096543297704,
+    "last_content_update" : 1591746790118,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "E7BBC33B",
+        "caption" : "subInternetVOIP3",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=subInternetVOIP3&cache_key=E7BBC33B",
+        "displayedObservations" : 2,
+        "environment" : "",
+        "expression" : "subInternetVOIP3",
+        "object" : "subInternetVOIP3",
+        "preview" : 0,
+        "totalObservations" : 2,
+        "variables" : 41
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 17,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

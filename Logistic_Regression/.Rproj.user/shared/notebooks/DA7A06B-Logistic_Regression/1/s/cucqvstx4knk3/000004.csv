@@ -1,0 +1,5 @@
+"0","pred1 <- predict(logis1,testData)"
+"0","logisDf <- data.frame(testData$Class,pred1)"
+"0","colnames(logisDf) <- c(""Actual"",""Predicted"")"
+"0","View(logisDf)"
+"0",""

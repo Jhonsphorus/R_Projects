@@ -1,0 +1,3 @@
+"0","svr_df <- data.frame(cars$dist,svr_pred)"
+"0","colnames(svr_df) <- c(""Actual_Distsance"",""Predicted_Destance"")"
+"0","View(svr_df)"

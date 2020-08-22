@@ -1,0 +1,226 @@
+"0","grid <- expand.grid(C = c(0,0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2,5))"
+"0","svm_Linear_Grid3 <- train(target ~., data = training, method = ""svmLinear"","
+"0","trControl=trctrl,"
+"0","preProcess = c(""center"", ""scale""),"
+"0","tuneGrid = grid,"
+"0","tuneLength = 10)"
+"2","model fit failed for Fold01.Rep1: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold02.Rep1: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold03.Rep1: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold04.Rep1: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold05.Rep1: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold06.Rep1: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold07.Rep1: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold08.Rep1: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold09.Rep1: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold10.Rep1: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold01.Rep2: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold02.Rep2: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold03.Rep2: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold04.Rep2: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold05.Rep2: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold06.Rep2: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold07.Rep2: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold08.Rep2: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold09.Rep2: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold10.Rep2: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold01.Rep3: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold02.Rep3: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold03.Rep3: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold04.Rep3: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold05.Rep3: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold06.Rep3: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold07.Rep3: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold08.Rep3: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold09.Rep3: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","model fit failed for Fold10.Rep3: C=0.00 Error in .local(x, ...) : 
+  No Support Vectors found. You may want to change your parameters
+"
+"2","There were missing values in resampled performance measures."
+"2","missing values found in aggregated results"
+"0","svm_Linear_Grid3"
+"1","Support Vector Machines with Linear Kernel"
+"1"," "
+"1","
+
+"
+"1","213"
+"1",""
+"1"," samples"
+"1","
+"
+"1"," 13"
+"1",""
+"1"," predictor"
+"1",""
+"1","
+"
+"1","  2"
+"1"," "
+"1","classes:"
+"1"," "
+"1","'0', '1'"
+"1"," "
+"1","
+"
+"1","
+"
+"1","Pre-processing: centered (13), scaled (13)"
+"1"," "
+"1","
+"
+"1","Resampling:"
+"1"," "
+"1","Cross-Validated (10 fold, repeated 3 times)"
+"1"," "
+"1","
+"
+"1","Summary of sample sizes:"
+"1"," "
+"1","191, 192, 191, 192, 192, 191, ..."
+"1"," "
+"1","
+"
+"1","Resampling results"
+"1"," across tuning parameters"
+"1",":
+
+"
+"1",""
+"1","  C   "
+"1","  Accuracy "
+"1","  Kappa    "
+"1","
+"
+"1","  0.00"
+"1","        NaN"
+"1","        NaN"
+"1","
+"
+"1","  0.01"
+"1","  0.8236797"
+"1","  0.6368501"
+"1","
+"
+"1","  0.05"
+"1","  0.8251227"
+"1","  0.6404603"
+"1","
+"
+"1","  0.10"
+"1","  0.8218759"
+"1","  0.6347207"
+"1","
+"
+"1","  0.25"
+"1","  0.8218038"
+"1","  0.6350294"
+"1","
+"
+"1","  0.50"
+"1","  0.8202165"
+"1","  0.6318427"
+"1","
+"
+"1","  0.75"
+"1","  0.8155988"
+"1","  0.6221524"
+"1","
+"
+"1","  1.00"
+"1","  0.8187013"
+"1","  0.6289239"
+"1","
+"
+"1","  1.25"
+"1","  0.8187013"
+"1","  0.6289239"
+"1","
+"
+"1","  1.50"
+"1","  0.8187013"
+"1","  0.6289239"
+"1","
+"
+"1","  1.75"
+"1","  0.8187013"
+"1","  0.6289239"
+"1","
+"
+"1","  2.00"
+"1","  0.8187013"
+"1","  0.6289239"
+"1","
+"
+"1","  5.00"
+"1","  0.8187013"
+"1","  0.6289239"
+"1","
+"
+"1","
+"
+"1","Accuracy was used to select the optimal model using the largest value.
+"
+"1","The final value used for the model was C = 0.05."
+"1","
+"
+"0","plot(svm_Linear_Grid3)"
+"0",""

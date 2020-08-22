@@ -1,0 +1,5 @@
+"0","indexes = sample(1:nrow(loan), size=0.5*nrow(loan)) # Random sample of 50% of row numbers created"
+"0","Train50 <- loan[indexes,] # Training data contains created indices"
+"0","Test50 <- loan[-indexes,] # Test data contains the rest"
+"0","# Using any proportion, other than 0.5 above and size Training and Test data can be constructed"
+"0",""

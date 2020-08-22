@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1596504546993.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2493477353",
+    "id" : "D5CB7DF9",
+    "lastKnownWriteTime" : 1596849527,
+    "last_content_update" : 1596849527,
+    "path" : "~/RProject/Personal_Practice_New/RecommendationEngine/RecommendationApp/recommender.R",
+    "project_path" : "RecommendationApp/recommender.R",
+    "properties" : {
+        "cursorPosition" : "16,2",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

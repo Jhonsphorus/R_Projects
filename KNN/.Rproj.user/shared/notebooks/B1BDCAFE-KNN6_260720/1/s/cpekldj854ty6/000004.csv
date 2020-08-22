@@ -1,0 +1,4 @@
+"0","# Draw box plots to compare models"
+"0","scales <- list(x=list(relation=""free""), y=list(relation=""free""))"
+"0","bwplot(results, scales=scales)"
+"0",""

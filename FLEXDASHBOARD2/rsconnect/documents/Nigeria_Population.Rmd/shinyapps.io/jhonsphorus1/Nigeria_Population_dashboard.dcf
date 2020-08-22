@@ -1,0 +1,12 @@
+name: Nigeria_Population_dashboard
+title: Nigeria_Population_dashboard
+username:
+account: jhonsphorus1
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2376978
+bundleId: 3215417
+url: https://jhonsphorus1.shinyapps.io/Nigeria_Population_dashboard/
+when: 1591040261.1515
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,0 +1,2 @@
+"0",""
+"0","plot(stocks$dividend_yield,stocks$performance_percent,main = ""Stock Performance Perc Vs Divident yield"")"

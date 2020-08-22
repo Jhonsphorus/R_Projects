@@ -1,0 +1,1 @@
+"0","DT_model <- train(class ~ ., data=train_mushroom,method=""rpart"",preProcess=c(""center"",""scale""),trControl=control,tuneLength=20)"

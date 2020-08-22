@@ -1,0 +1,4 @@
+"0","train.loan.n <- as.data.frame(lapply(train.loan[,2:8], normalize))"
+"0",""
+"0","test.loan.n <- as.data.frame(lapply(test.loan[,2:8], normalize))"
+"0",""

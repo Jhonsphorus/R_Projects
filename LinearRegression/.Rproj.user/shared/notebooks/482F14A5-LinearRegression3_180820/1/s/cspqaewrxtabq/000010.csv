@@ -1,0 +1,2 @@
+"0",""
+"0","plot(density(cars$dist), main=""Density Plot: Distance"", ylab=""Frequency"", sub=paste(""Skewness:"", round(e1071::skewness(cars$dist), 2)))  # density plot for 'dist'"

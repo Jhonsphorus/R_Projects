@@ -1,0 +1,397 @@
+---
+title: "KNN_Model"
+author: "Johnson Adebayo"
+date: "5/5/2020"
+output: html_document
+---
+
+Source: https://www.edureka.co/blog/knn-algorithm-in-r/
+        https://online.stat.psu.edu/stat508/book/export/html/796
+        
+# Problem Statement: To study a bank credit dataset and build a Machine Learning model that predicts whether an applicant’s loan can be approved or not based on his socio-economic profile. 
+
+# Dataset Description: The bank credit dataset contains information about 1000s of applicants. This includes their account balance, credit amount, age, occupation, loan records, etc. By using this data, we can predict whether or not to approve the loan of an applicant.
+
+# Logic: This problem statement can be solved using the KNN algorithm that will classify the applicant’s loan request into two classes:
+
+# 1. Approved
+# 2. Disapproved
+
+Step 1: Import the dataset
+```{r}
+loan <- read.csv("german_credit.csv")
+View(loan)
+
+```
+
+
+
+```{r}
+str(loan)
+
+```
+
+# This graphic/plot is used to check the correlation between the variables
+```{r}
+library(GGally)
+ggcorr(loan)
+
+# ggcorr(loan, label = TRUE, label_alpha = )
+
+
+
+```
+
+Step 2: Data Cleaning
+
+```{r}
+loan.subset <- loan[c('Creditability','Age..years.','Sex...Marital.Status','Occupation','Account.Balance','Credit.Amount','Length.of.current.employment','Purpose')]
+
+# loan.subset$Creditability <- as.factor(loan.subset$Creditability) # optional
+str(loan.subset)
+```
+
+Step 3a: Data Normalization/Standardization
+# Source: https://www.element61.be/en/resource/standardization-case-real-time-predictions
+
+# Normalization/Standardization involves feature scaling where the features(variables) used for making predictions are scaled to the same range of values.
+
+# Purpose: The goal of normalization is to change the values of numeric columns in the dataset to a common scale, without distorting differences in the ranges of values. 
+
+#Note: * Normalization should be done after data splitting not before splitting dataset i.e. the way it was done here is wrong
+
+* The feature scaling process is applied in the data preprocessing step before applying any machine learning algorithm.
+```{r}
+
+head(loan.subset)
+```
+
+# Wrong way of using normalization.
+```{r}
+#Normalization
+normalize1 <- function(x) {
+return ((x - min(x)) / (max(x) - min(x))) }
+
+# Applying the created normalization
+loan.subset.n <- as.data.frame(lapply(loan.subset[,2:8], normalize))
+head(loan.subset.n)
+```
+
+Step 4: Data Splicing
+```{r}
+set.seed(123)
+#random selection of 70% data.
+dat.d <- sample(1:nrow(loan.subset.n),size=nrow(loan.subset.n)*0.7,replace = FALSE) 
+#dat.d <- sample(1:nrow(loan.subset),size=nrow(loan.subset)*0.7,replace = FALSE) 
+
+train.loan <- loan.subset[dat.d,] # 70% training data
+test.loan <- loan.subset[-dat.d,] # remaining 30% test data
+View(train.loan)
+View(test.loan)
+#train.loan <- loan.subset.n[dat.d,] # 70% training data
+#test.loan <- loan.subset.n[-dat.d,] # remaining 30% test data
+
+```
+
+# Step 3b: Data Normalization/Standardization
+# Right Way of using normalization i.e. after data splitting
+```{r}
+#Normalization
+normalize1 <- function(x) {
+return ((x - min(x)) / (max(x) - min(x))) }
+
+train.loan<- as.data.frame(lapply(train.loan, normalize))
+test.loan <- as.data.frame(lapply(test.loan, normalize))
+View(train.loan)
+View(test.loan)
+```
+
+```{r}
+#train.loan
+```
+
+```{r}
+#Creating seperate dataframe for 'Creditability' feature which is our target.
+train.loan_labels <- loan.subset[dat.d,1]
+test.loan_labels <-loan.subset[-dat.d,1]
+train.loan_labels
+```
+
+Step 5: Building a Machine Learning model
+```{r}
+# Load class package
+library(class)
+
+```
+
+
+```{r}
+#Find the number of observation
+NROW(train.loan_labels) 
+
+sqrt(NROW(train.loan_labels) )
+
+```
+
+
+```{r}
+# k= 26.45 i.e either 26 or 27
+knn.26 <- knn(train=train.loan, test=test.loan, cl=train.loan_labels, k=26)
+knn.27 <- knn(train=train.loan, test=test.loan, cl=train.loan_labels, k=27)
+
+```
+
+
+Step 6: Model Evaluation
+Here the model evaluation used is 'Accuracy'
+```{r}
+#Calculate the proportion of correct classification for k = 26, 27
+ACC.26 <- 100 * sum(test.loan_labels == knn.26)/NROW(test.loan_labels)
+ACC.27 <- 100 * sum(test.loan_labels == knn.27)/NROW(test.loan_labels)
+
+ACC.26
+
+ACC.27
+
+```
+
+
+```{r}
+# Check prediction against actual value in tabular form for k=26
+table(knn.26 ,test.loan_labels)
+ 
+
+```
+
+
+```{r}
+# Check prediction against actual value in tabular form for k=27
+table(knn.27 ,test.loan_labels)
+ 
+
+```
+
+
+```{r}
+library(caret)
+confusionMatrix(table(knn.26 ,test.loan_labels))
+
+```
+
+#Step 7: Optimization
+
+In order to improve the accuracy of the model, you can use n number of techniques such as the Elbow method and maximum percentage accuracy graph.  In the below code snippet, I’ve created a loop that calculates the accuracy of the KNN model for ‘K’ values ranging from 1 to 28. This way you can check which ‘K’ value will result in the most accurate model:
+
+```{r}
+i=1
+k.optm=1
+for (i in 1:28){
+  knn.mod <- knn(train=train.loan, test=test.loan, cl=train.loan_labels, k=i)
+  k.optm[i] <- 100 * sum(test.loan_labels == knn.mod)/NROW(test.loan_labels)
+  k=i
+ cat(k,'=',k.optm[i],' ')
+}
+
+```
+
+From the output you can see that for K = 18, 19, we achieve the maximum accuracy, i.e. 68%. We can also represent this graphically, like so:
+```{r}
+#Accuracy plot
+plot(k.optm, type="b", xlab="K- Value",ylab="Accuracy level")
+
+```
+
+# Alternatively:
+
+# NOTE: You can use either train2 and test2 of case 1 or case 2 to build your model and make prediction
+
+# Case 1: Using the dataset without normalizing
+```{r}
+library(rsample)
+set.seed(2)
+loan.subset$Creditability <- as.factor(loan.subset$Creditability) 
+train_test <- initial_split(loan.subset, prop = 0.7)
+train3 <- training(train_test)
+test3 <- testing(train_test)
+
+View(train3)
+View(test3)
+```
+
+
+Case 2: Using normalized dataset
+```{r}
+library(rsample)
+
+# Converting the target variable (Creditability) to categorical variable
+loan.subset$Creditability <- as.factor(loan.subset$Creditability) 
+
+# splitting the dataset into train and test
+set.seed(2)
+train_test <- initial_split(loan.subset, prop = 0.7)
+train2 <- training(train_test)
+test2 <- testing(train_test)
+
+# Removing the feature 'Creditability' from the dataset to be normalize
+train3 <- train2[,c(2:8)]
+test3 <- test2[,c(2:8)]
+
+#Normalizing the 'test3' and 'train3' datasets
+normalize <- function(x) {
+return ((x - min(x)) / (max(x) - min(x))) }
+
+train3<- as.data.frame(lapply(train3, normalize))
+test3 <- as.data.frame(lapply(test3, normalize))
+
+# Adding 'creditability' feature back to the 'train3' and 'test3' as their 'target'
+train3$Creditability <- train2[,1]
+test3$Creditability <- test2[,1]
+
+#View(train2)
+#View(train3)
+#View(test2)
+#View(test3)
+
+```
+
+
+# Checking for NULL in the training and testing dataset
+```{r}
+sapply(train3, function(x) sum(is.na(x)))
+sapply(train3, function(x) sum(is.na(x)))
+
+```
+
+
+```{r}
+#train_test
+str(train2)
+
+```
+
+
+```{r}
+set.seed(2)
+control <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+
+knn_model <- train(Creditability~., data = train3,method="knn",trControl=control,preProcess=c("center","scale"))
+
+```
+
+```{r}
+pred2 <- predict(knn_model,test3)
+confusionMatrix(pred2,test2$Creditability)
+
+
+```
+
+
+
+# Below are just Some rough code for practice and confirmation
+
+```{r}
+margin.table(prop.table(table(loan$Duration.in.Current.address,loan$Most.valuable.available.asset, loan$Concurrent.Credits,loan$No.of.Credits.at.this.Bank,loan$Occupation,loan$No.of.dependents,loan$Telephone, loan$Foreign.Worker)),1)
+
+margin.table(prop.table(table(loan$Duration.in.Current.address,loan$Most.valuable.available.asset, loan$Concurrent.Credits,loan$No.of.Credits.at.this.Bank,loan$Occupation,loan$No.of.dependents,loan$Telephone, loan$Foreign.Worker)),2)
+
+```
+
+```{r}
+library(gmodels)
+CrossTable(loan$Creditability, loan$Account.Balance, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+CrossTable(loan$Creditability, loan$Payment.Status.of.Previous.Credit, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+CrossTable(loan$Creditability, loan$Purpose, digits=1, prop.r=F, prop.t=F, prop.chisq=F, chisq=T)
+
+
+```
+# When youu attached then you don't need to specified the object of the dataset i.e. you used Duration.of.Credit..month. instead of loan$Duration.of.Credit..month.
+```{r, attach(loan)}
+
+#attach(loan) # If the data frame is attached then the column names may be directly called
+summary(Duration.of.Credit..month.) # Summary statistics are printed for this variable
+brksCredit <- seq(0, 80, 10) # Bins for a nice looking histogram
+hist(Duration.of.Credit..month., breaks=brksCredit, xlab = "Credit Month", ylab = "Frequency", main = " ", cex=0.4) # produces nice looking histogram
+boxplot(Duration.of.Credit..month., bty="n",xlab = "Credit Month", cex=0.4) # For boxplot
+
+summary(Duration.of.Credit..month.) # Summary statistics are printed for this variable
+brksCredit <- seq(0, 80, 10) # Bins for a nice looking histogram
+hist(Duration.of.Credit..month., breaks=brksCredit, xlab = "Credit Month", ylab = "Frequency", main = " ", cex=0.4) # produces nice looking histogram
+boxplot(Duration.of.Credit..month., bty="n",xlab = "Credit Month", cex=0.4) # For boxplot
+
+
+
+```
+
+
+```{r}
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),1)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),2)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),3)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),4)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),5)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),6)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),7)
+margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),8)
+
+```
+
+
+
+```{r}
+
+
+```
+
+
+
+```{r}
+
+v1 <- c("Home","House","Venue","Home","House","Venue")
+v2 <- c(200,10,14.5,1000,700,80)
+v3 <- data.frame(v1,v2)
+```
+
+```{r}
+v3$v2[v3$v2<20] <- 1
+v3$v2[v3$v2>20 & v3$v2<=100] <- 2
+v3$v2[v3$v2>100 & v3$v2<=500] <- 3
+v3$v2[v3$v2>500] <- 4
+v3$v2 <- as.factor(v3$v2)
+```
+
+```{r}
+#v3$v1 <- as.factor(v3$v1)
+
+#v3$v1[v3$v1=="Home"] <- 1
+#v3$v1[v3$v1=="House"] <- 2
+#v3$v1[v3$v1=="Venue"] <- 3
+
+v3$v4 <- 1
+v3$v4[v3$v1=="House"] <- 2
+v3$v4[v3$v1=="Venue"] <- 3
+```
+
+# How to add 'Creditability' column to the loan.subset.n dataset
+```{r}
+
+loan.subset.n$Creditability <- loan.subset[,1]
+View(loan.subset.n)
+```
+
+
+
+```{r}
+
+
+```
+
+
+
+```{r}
+
+
+```
+
+
+
+

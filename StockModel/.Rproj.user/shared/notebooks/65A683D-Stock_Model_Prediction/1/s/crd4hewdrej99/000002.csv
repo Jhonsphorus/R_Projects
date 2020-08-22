@@ -1,0 +1,3 @@
+"0","# Creating connection to the database"
+"0","connector1 <- dbConnect(SQLite(), dbname = ""stock_model.sqlite"")"
+"0","#db <- dbConnect(RSQLite::SQLite(), dbname = ""stock_portfolio.sqlite"")"

@@ -1,0 +1,2 @@
+"0","dta_tidy3 <- dta_tidy2 %>% spread(mode, passengers)"
+"0","view(dta_tidy3)"

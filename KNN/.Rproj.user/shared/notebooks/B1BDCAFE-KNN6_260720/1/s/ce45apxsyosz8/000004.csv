@@ -1,0 +1,2 @@
+"0","featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = ""box"")"
+"0",""

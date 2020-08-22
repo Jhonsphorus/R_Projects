@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588699991417.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "666548623",
+    "id" : "DDA8B30B",
+    "lastKnownWriteTime" : 1588724916,
+    "last_content_update" : 1588724916457,
+    "path" : "~/RProject/Personal_Practice_New/StockModel/Stock_Model_Prediction.Rmd",
+    "project_path" : "Stock_Model_Prediction.Rmd",
+    "properties" : {
+        "cursorPosition" : "185,6",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

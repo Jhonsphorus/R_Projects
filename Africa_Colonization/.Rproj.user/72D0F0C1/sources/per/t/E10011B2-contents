@@ -1,0 +1,88 @@
+---
+title: "Analysis of Africa Colonisation"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    social: menu
+    source_code: embed
+    theme: cerulean
+    
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+library(shinythemes)
+#library()
+```
+
+```{r}
+# For user to select choice of theme
+#renderUI({themeSelector()})
+```
+
+
+
+
+
+PLOTS {.storyboard data-navmenu="Menu"}
+===============================================================================
+
+Colour Selection Panel{.sidebar data-width=250}
+----------------------------------------------------------------
+
+```{r}
+#selectInput(inputId = "col",label="Select Colour", choices =c("light Green","White"))
+
+
+```
+
+### Trend of Colonization Vs Civil Right Movement
+
+
+```{r}
+  
+img(src="image7.png", height=450, width=1050)
+
+```
+
+### Trend of Africa Countries Independence Vs Civil Right Movement
+```{r}
+img(src="image6.png", height=450, width=1050)
+```
+
+
+ABOUT {.storyboard data-navmenu="Menu"}
+===============================================================================
+Colour Selection Panel{.sidebar data-width=250}
+----------------------------------------------------------------
+
+###
+
+```{r}
+#selectInput(inputId = "col",label="Select Colour", choices =c("light Green","White"))
+
+
+```
+
+
+CONTACT {.storyboard data-navmenu="Menu"}
+===============================================================================
+
+Colour Selection Panel{.sidebar data-width=250}
+----------------------------------------------------------------
+
+###
+
+```{r}
+#selectInput(inputId = "col",label="Select Colour", choices =c("light Green","White"))
+
+
+```
+
+```{r}
+#rmarkdown::run("AfriCol.Rmd")
+```
+

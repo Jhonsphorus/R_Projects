@@ -1,0 +1,12 @@
+name: NigeriaTelecomDashboard
+title: NigeriaTelecomDashboard
+username:
+account: phorus
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2447819
+bundleId: 3263797
+url: https://phorus.shinyapps.io/NigeriaTelecomDashboard/
+when: 1592009121.25309
+asMultiple: FALSE
+asStatic: FALSE

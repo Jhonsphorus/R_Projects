@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586995173270.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AC0379E2",
+    "lastKnownWriteTime" : 7310028807570858028,
+    "last_content_update" : 1586995173270,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "6BA0421D",
+        "caption" : "mushrooms",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=mushrooms&cache_key=6BA0421D",
+        "displayedObservations" : "8124",
+        "environment" : "",
+        "expression" : "mushrooms",
+        "object" : "mushrooms",
+        "preview" : "0",
+        "totalObservations" : "8124",
+        "variables" : "23"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

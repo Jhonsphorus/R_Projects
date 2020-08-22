@@ -1,0 +1,3 @@
+"0","train <- read.csv(""train.csv"")"
+"0","test <- read.csv(""test.csv"")"
+"0","View(test)"

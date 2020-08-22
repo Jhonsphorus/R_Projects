@@ -1,0 +1,6 @@
+"0","#rate <- computeContactRate()"
+"0","renderGauge({"
+"0","  gauge(input$rate, min = 0, max = 100, symbol = '%', gaugeSectors(success = c(80, 100), warning = c(40, 79), danger = c(0, 39)))"
+"0","})"
+"1","<shiny.render.function> 
+"

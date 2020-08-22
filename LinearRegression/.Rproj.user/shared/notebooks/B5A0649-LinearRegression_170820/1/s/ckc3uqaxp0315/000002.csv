@@ -1,0 +1,2 @@
+"0","modelSummary <- summary(model1)"
+"0","modelCoef <- modelSummary$coefficients"

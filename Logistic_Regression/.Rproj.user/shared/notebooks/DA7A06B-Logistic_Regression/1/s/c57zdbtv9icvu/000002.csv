@@ -1,0 +1,1 @@
+"0","logis2 <- train(Class~Cell.shape,data=trainData, method=""glm"",family=""binomial"",trControl=control,preProcess=c(""center"",""scale""),tuneLength=5, metric=metric)"

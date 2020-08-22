@@ -1,0 +1,51 @@
+---
+title: "Flexdashboard: Inline Shiny"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    social: menu
+    source_code: embed
+    
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+```{r}
+# importing package and loading data 
+library(datasets)
+data(WorldPhones)
+View(WorldPhones)
+
+```
+
+
+### Inline Shiny App via shinyApp
+
+```{r}
+shinyApp(
+  ui = fillPage(
+    fillCol(flex = c(NA, 1), 
+      inputPanel(
+        selectInput("region", "Region:", choices = colnames(WorldPhones))
+      ),
+      plotOutput("phonePlot", height = "100%")
+    )
+  ),
+  server = function(input, output) {
+    output$phonePlot <- renderPlot({
+      barplot(WorldPhones[,input$region]*1000, 
+              ylab = "Number of Telephones", xlab = "Year")
+    })
+  },
+  options = list(height = 600)
+)
+```
+
+
+```{r}
+#rmarkdown::run("Inline_Shiny.Rmd")
+```

@@ -1,0 +1,4 @@
+"0","#par(mfrow=c(1,2)) # two plots on a row"
+"0","par(mfrow=c(2,2)) # two plots on a row, with two rows"
+"0","plot(m1)"
+"0",""

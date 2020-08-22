@@ -1,0 +1,2 @@
+"0","#aggregate(data=smple, director_facebook_likes ~ cl$cluster,sum)"
+"0",""

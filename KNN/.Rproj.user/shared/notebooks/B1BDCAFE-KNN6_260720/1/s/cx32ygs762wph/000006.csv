@@ -1,0 +1,3 @@
+"0","varimp_mars <- varImp(model_mars)"
+"0","plot(varimp_mars, main=""Variable Importance with MARS"")"
+"0",""

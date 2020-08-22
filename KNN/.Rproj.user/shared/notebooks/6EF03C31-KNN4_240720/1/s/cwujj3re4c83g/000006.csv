@@ -1,0 +1,2 @@
+"0","set.seed(100)"
+"0","knn.25 <- knn(train = train.loan.n, test = test.loan.n, cl=train.loan_labels, k=25)"

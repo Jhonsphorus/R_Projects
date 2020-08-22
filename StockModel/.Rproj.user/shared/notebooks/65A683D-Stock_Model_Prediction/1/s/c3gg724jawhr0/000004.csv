@@ -1,0 +1,2 @@
+"0","ggcorr(stocks)"
+"2","data in column(s) 'symbol', 'float', 'pb_ratio', 'ceo', 'headquarters_city', 'headquarters_state', 'sector', 'industry', 'SIC', 'SIC_ID', 'Industry_Name', 'Industry_ID', 'Industry_Major_ID' are not numeric and were ignored"

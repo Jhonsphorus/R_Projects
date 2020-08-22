@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591298595007.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "881EA3D8",
+    "lastKnownWriteTime" : 7959393304261435424,
+    "last_content_update" : 1591298595007,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "E5EDE99D",
+        "caption" : "subInternetTECH2",
+        "contentUrl" : "grid_resource/gridviewer.html?env=_rs_no_env&obj=subInternetTECH2&cache_key=E5EDE99D",
+        "displayedObservations" : "84",
+        "environment" : "_rs_no_env",
+        "expression" : "subInternetTECH2",
+        "object" : "subInternetTECH2",
+        "preview" : "0",
+        "totalObservations" : "84",
+        "variables" : "3"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 23,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

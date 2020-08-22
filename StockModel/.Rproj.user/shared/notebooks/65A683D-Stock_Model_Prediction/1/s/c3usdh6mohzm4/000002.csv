@@ -1,0 +1,3 @@
+"0","rf_model <- train(Buy~dividend_yield + pe_ratio + company_age + market_cap, data = trainDt,method=""rf"",trControl=control,preProcess=c(""center"",""scale""))"
+"0",""
+"0","#tree_model <- train(Buy~dividend_yield + pe_ratio + company_age + market_cap, data = trainDt,method=""rf"",trControl=control,preProcess=c(""center"",""scale""))"

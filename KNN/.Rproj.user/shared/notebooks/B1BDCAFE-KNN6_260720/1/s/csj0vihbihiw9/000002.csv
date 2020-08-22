@@ -1,0 +1,8 @@
+"0","# Set the seed for reproducibility"
+"0","set.seed(100)"
+"0",""
+"0","# Train the model using randomForest and predict on the training data itself."
+"0","model_mars = train(Purchase ~ ., data=trainData, method='earth')"
+"2","glm.fit: fitted probabilities numerically 0 or 1 occurred"
+"0","fitted <- predict(model_mars)"
+"0",""

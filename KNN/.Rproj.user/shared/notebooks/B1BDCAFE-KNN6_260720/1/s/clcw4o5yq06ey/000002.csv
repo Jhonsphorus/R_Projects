@@ -1,0 +1,31 @@
+"0","#library(caret) # The package that housed preProcess() function"
+"0","# Create the knn imputation model on the training data"
+"0","#preProcess_missingdata_model <- preProcess(trainData, method='bagImpute') # Alternative method"
+"0","preProcess_missingdata_model <- preProcess(trainData, method='knnImpute')"
+"0","preProcess_missingdata_model"
+"1","Created from"
+"1"," "
+"1","827"
+"1"," "
+"1","samples and"
+"1"," "
+"1","18"
+"1"," "
+"1","variables
+
+"
+"1","Pre-processing:
+"
+"1","  - centered (16)
+"
+"1",""
+"1","  - ignored (2)
+"
+"1",""
+"1","  - 5 nearest neighbor imputation (16)
+"
+"1",""
+"1","  - scaled (16)
+"
+"1","
+"

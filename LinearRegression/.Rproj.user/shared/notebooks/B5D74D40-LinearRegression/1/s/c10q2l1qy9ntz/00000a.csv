@@ -1,0 +1,1 @@
+"0","scatter.smooth(x=cars$speed, y = cars$dist, xlab =""Speed"",ylab =""Distance"", main=""Scatter Plot of Distance against Speed"")"

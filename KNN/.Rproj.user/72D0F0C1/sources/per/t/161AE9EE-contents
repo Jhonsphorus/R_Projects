@@ -1,0 +1,238 @@
+---
+title: "KNN4_240720"
+author: "Johnson Adebayo"
+date: "7/24/2020"
+output: html_document
+---
+
+# Source: https://www.edureka.co/blog/knn-algorithm-in-r/
+
+# Step 1: Import the dataset
+```{r}
+loan <- read.csv("german_credit.csv")
+```
+
+
+```{r}
+#View(loan)
+str(loan)
+
+```
+
+# Step 2: Data Cleaning
+```{r}
+loan.subset <- loan[c('Creditability','Age..years.','Sex...Marital.Status','Occupation','Account.Balance','Credit.Amount','Length.of.current.employment','Purpose')]
+
+```
+
+
+```{r}
+#View(loan.subset)
+str(loan.subset)
+
+```
+
+# Step 3: Data Splicing
+
+# Note: The dat.d is index (indices) of the position of train.loan and test.loan in loan.subset.n
+```{r}
+set.seed(123)
+dat.d <- sample(1:nrow(loan.subset),size=nrow(loan.subset)*0.7,replace = FALSE) #random selection of 70% data.
+
+#dat.d <- sample(1:1000, size=nrow(loan.subset.n)*0.7,replace = FALSE)
+
+#train.loan <- loan.subset[dat.d,] # 70% training data
+#test.loan <- loan.subset[-dat.d,] # remaining 30% test data
+
+# Using the normalized dataset as train and test dataset
+train.loan <- loan.subset[dat.d,] # 70% training data
+test.loan <- loan.subset[-dat.d,] # remaining 30% test data
+
+
+```
+
+
+```{r}
+View(train.loan)
+
+```
+
+# Step 4: Data Normalization
+```{r}
+
+#Normalization function
+normalize <- function(x) {
+  
+  return ((x - min(x)) / (max(x) - min(x))) 
+  
+  }
+```
+
+
+
+```{r}
+# Normalized train and test dataset
+train.loan.n <- as.data.frame(lapply(train.loan[,2:8], normalize))
+
+test.loan.n <- as.data.frame(lapply(test.loan[,2:8], normalize))
+
+```
+
+```{r}
+#head(train.loan.n)
+nrow(train.loan.n)
+nrow(test.loan.n)
+```
+
+
+
+```{r}
+View(train.loan)
+
+```
+
+
+```{r}
+#Creating seperate dataframe for 'Creditability' feature which is our target.
+train.loan_labels <- loan.subset[dat.d,1]
+#train.loan_labels2 <- train.loan["Creditability"]
+
+test.loan_labels <-loan.subset[-dat.d,1]
+#test.loan_labels2 <- test.loan["Creditability"]
+
+# For comparing that their values were the same
+#View(train.loan_labels)
+#View(train.loan_labels2)
+```
+
+# Step 5: Building a Machine Learning model
+
+```{r}
+library(class)
+
+```
+
+```{r}
+#Find the number of observation
+#NROW(train.loan_labels) 
+
+# Finding the square root of the number of data points in the train dataset (square root of 700)
+(NROW(train.loan_labels))^0.5
+
+
+```
+
+
+```{r}
+# Fitting the model for k = 26 and 27
+knn.26 <- knn(train=train.loan.n, test=test.loan.n, cl=train.loan_labels, k=26)
+knn.27 <- knn(train=train.loan.n, test=test.loan.n, cl=train.loan_labels, k=27)
+```
+
+
+# Step 6: Model Evaluation: Here you want to check the performance of the models
+```{r}
+set.seed(100)
+# Calculate the proportion of correct classification for k = 26, 27
+ACC.26 <- 100 * sum(test.loan_labels == knn.26)/NROW(test.loan_labels)
+ACC.27 <- 100 * sum(test.loan_labels == knn.27)/NROW(test.loan_labels)
+
+ACC.26
+ACC.27
+```
+
+
+```{r}
+# Check prediction against actual value in tabular form for k=26
+table(knn.26 ,test.loan_labels)
+#knn.26
+
+```
+
+```{r}
+# Check prediction against actual value in tabular form for k=27
+table(knn.27 ,test.loan_labels)
+#knn.27
+
+```
+
+# Alternatively: You can use confusion matrix to calculate the accuracy of the KNN model with K value set to 26
+
+
+```{r}
+library(caret)
+```
+
+
+```{r}
+#confusionMatrix(table(knn.26 ,test.loan_labels))
+ confusionMatrix(table(knn.27 ,test.loan_labels))
+
+```
+
+# 7. Optimization: Here i'm trying to improve the accuracy of the model
+```{r}
+
+i=1
+k.optm=1
+for (i in 1:28){
+  knn.mod <- knn(train=train.loan.n, test=test.loan.n, cl=train.loan_labels, k=i)
+  k.optm[i] <- 100 * sum(test.loan_labels == knn.mod)/NROW(test.loan_labels)
+  k=i
+  cat(k,'=',k.optm[i],"
+  ")
+
+  }
+
+```
+
+
+```{r}
+plot(k.optm, type="b", xlab="K- Value",ylab="Accuracy level")
+
+```
+
+Note: Checking for k = 25
+```{r}
+set.seed(100)
+knn.25 <- knn(train = train.loan.n, test = test.loan.n, cl=train.loan_labels, k=25)
+```
+
+```{r}
+set.seed(100)
+confusionMatrix(table(knn.25,test.loan_labels2))
+```
+
+
+# In conclusion, using the dataset that is normalized before splitting improved the accuracy of the model by 1+% while using the dataset that was splitted before normalized improved the accuracy of the model by 3+%.
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+

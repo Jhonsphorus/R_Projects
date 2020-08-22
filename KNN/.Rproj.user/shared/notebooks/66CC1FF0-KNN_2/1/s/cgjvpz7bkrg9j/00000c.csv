@@ -1,0 +1,5 @@
+"0","# Option 1 for creating marginal proportional tables"
+"0","margin.table(prop.table(table(Duration.in.Current.address, Most.valuable.available.asset, Concurrent.Credits,No.of.Credits.at.this.Bank,Occupation,No.of.dependents,Telephone, Foreign.Worker)),1)"
+"2","Error in table(Duration.in.Current.address, Most.valuable.available.asset,  : 
+  object 'Duration.in.Current.address' not found
+"

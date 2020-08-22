@@ -1,0 +1,6 @@
+"0",""
+"0","#cor(stocks$volume,stocks$performance_percent)"
+"0","#cor(stocks$market_cap,stocks$performance_percent)"
+"0","#cor(stocks$company_age,stocks$performance_percent)"
+"0","#cor(stocks$pe_ratio,stocks$performance_percent)"
+"0","#cor(stocks$open,stocks$performance_percent)"

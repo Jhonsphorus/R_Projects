@@ -1,0 +1,5 @@
+"0","p$col3 <- ""No"""
+"0","p$col3[p$col1<p$col2] <- ""Yes"""
+"0","p$col3 <- as.factor(p$col3)"
+"0",""
+"0","p"

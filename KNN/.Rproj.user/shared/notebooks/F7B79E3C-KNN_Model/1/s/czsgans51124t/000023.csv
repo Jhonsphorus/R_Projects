@@ -1,0 +1,1 @@
+"0","boxplot(Duration.of.Credit..month., bty=""n"",xlab = ""Credit Month"", cex=0.4) # For boxplot"

@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1597682729995.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3176539718",
+    "id" : "701DF963",
+    "lastKnownWriteTime" : 1597876441,
+    "last_content_update" : 1597876446142,
+    "path" : "~/RProject/Personal_Practice_New/LinearRegression/LinearRegression_170820.Rmd",
+    "project_path" : "LinearRegression_170820.Rmd",
+    "properties" : {
+        "cursorPosition" : "37,0",
+        "scrollLine" : "34",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

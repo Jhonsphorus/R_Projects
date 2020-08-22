@@ -1,0 +1,1 @@
+"0","scatter.smooth(x=cars1$speed, y=cars1$dist, main = ""Plot of Distance Vs Speed"", ylab =""Stopping Distance"", xlab =""Speed"")"

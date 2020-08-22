@@ -1,0 +1,3 @@
+"0","#dataurl <- ""https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"""
+"0","#download.file(url = dataurl, destfile = ""wine.data"")"
+"0","#wine_df <- read.csv(""wine.data"", header = FALSE)"

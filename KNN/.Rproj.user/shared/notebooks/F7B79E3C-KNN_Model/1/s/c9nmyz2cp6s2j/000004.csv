@@ -1,0 +1,8 @@
+"0","#Normalization"
+"0","normalize1 <- function(x) {"
+"0","return ((x - min(x)) / (max(x) - min(x))) }"
+"0",""
+"0","train.loan<- as.data.frame(lapply(train.loan, normalize))"
+"0","test.loan <- as.data.frame(lapply(test.loan, normalize))"
+"0","View(train.loan)"
+"0","View(test.loan)"

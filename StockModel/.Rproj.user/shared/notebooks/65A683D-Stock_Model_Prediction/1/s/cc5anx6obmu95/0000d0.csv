@@ -1,0 +1,1 @@
+"0","abline(lm(stocks$performance_percent~stocks$market_cap), col=""red"")"

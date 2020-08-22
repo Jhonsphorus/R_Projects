@@ -1,0 +1,8 @@
+"0","# Define the training control"
+"0","fitControl <- trainControl("
+"0","    method = 'cv',                   # k-fold cross validation"
+"0","    number = 5,                      # number of folds"
+"0","    savePredictions = 'final',       # saves predictions for optimal tuning parameter"
+"0","    classProbs = T,                  # should class probabilities be returned"
+"0","    summaryFunction=twoClassSummary  # results summary function"
+"0",") "

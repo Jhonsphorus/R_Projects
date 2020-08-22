@@ -1,0 +1,6 @@
+"0","# Create Training and Test data -"
+"0","set.seed(100)  # setting seed to reproduce results of random sampling"
+"0","trainingRowIndex <- sample(1:nrow(cars1), 0.8*nrow(cars1))  # row indices for training data"
+"0","trainingData <- cars1[trainingRowIndex, ]  # model training data"
+"0","testData  <- cars1[-trainingRowIndex, ]   # test data"
+"0",""

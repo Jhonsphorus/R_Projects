@@ -1,0 +1,2 @@
+"0","# Visualize the decision tree with rpart.plot"
+"0","rpart.plot(tree, nn=TRUE)"

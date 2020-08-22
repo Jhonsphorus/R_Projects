@@ -1,0 +1,4 @@
+"0","set.seed(200)"
+"0","intrain <- createDataPartition(y=heart$target, p=0.7,list = FALSE)"
+"0","training <- heart[intrain,]"
+"0","testing <- heart[-intrain,]"

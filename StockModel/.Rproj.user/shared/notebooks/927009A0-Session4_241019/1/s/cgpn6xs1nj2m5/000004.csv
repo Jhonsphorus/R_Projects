@@ -1,0 +1,2 @@
+"0","#ggplot(dmd, aes(x = carat, y = price,colour=cut))+geom_point()"
+"0","ggplot(dmd, aes(carat, price,colour=color))+geom_point()"

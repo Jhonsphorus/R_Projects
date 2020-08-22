@@ -1,0 +1,156 @@
+---
+title: "DecisionTree"
+author: "Johnson Adebayo_SCV1007 (Cohort 1)"
+date: "4/10/2020"
+output: html_document
+---
+# Source: https://www.edureka.co/blog/decision-tree-algorithm/
+
+Problem Statement: To study a Mushroom data set in order to predict whether a given mushroom is edible(e) or poisonous(p) to human beings.
+
+Data Set Description: The given data set contains a total of 8124 observations of different kind of mushrooms and their properties such as odor, habitat, population, etc. A more in-depth structure of the data set is shown in the demo below. 
+
+Logic: To build a Decision Tree model in order to classify mushroom samples as either poisonous or edible by studying their properties such as odor, root, habitat, etc.
+
+Step 1: Install and load libraries
+```{r}
+#Loading libraries
+library(rpart,quietly = TRUE)
+library(caret,quietly = TRUE)
+library(rpart.plot,quietly = TRUE)
+library(rattle)
+```
+
+Step 2: Load the data set
+```{r}
+mushrooms <- read.csv("mushrooms.csv", header = TRUE)
+View(mushrooms)
+```
+
+
+```{r}
+# Structure of the dataset
+str(mushrooms)
+```
+
+
+```{r}
+ncol(mushrooms)
+nrow(mushrooms)
+```
+
+Step 3: Data Cleaning
+```{r}
+# Checking for Null values
+sapply(mushrooms, function(x) sum(is.na(x)) )
+```
+
+
+```{r}
+# deleting redundant variable `veil.type`
+mushrooms$veil.type <- NULL
+```
+
+
+```{r}
+# checking if the feature veil.type has being removed
+#str(mushrooms) # The number of variables has reduced to 22 from 23
+```
+
+Step 4: Data Exploration and Analysis
+
+The above output shows that the mushrooms with odor values ‘c’, ‘f’, ‘m’, ‘p’, ‘s’ and ‘y’ are clearly poisonous. And the mushrooms having almond (a) odor (400) are edible. Such observations will help us to predict the output class more accurately.
+```{r}
+# analyzing the odor variable
+table(mushrooms$class,mushrooms$odor)
+```
+
+
+```{r}
+# analyzing the habitat variable
+table(mushrooms$class,mushrooms$habitat)
+```
+
+
+```{r}
+# analyzing the odor variable
+table(mushrooms$class,mushrooms$cap.shape)
+```
+
+# Predicting variable for splitting the Decision Tree
+```{r}
+number.perfect.splits <- apply(X=mushrooms[-1], MARGIN = 2, FUN = function(col){
+t <- table(mushrooms$class,col)
+sum(t == 0)
+})
+ 
+# Descending order of perfect splits
+order <- order(number.perfect.splits,decreasing = TRUE)
+number.perfect.splits <- number.perfect.splits[order]
+ 
+# Plot graph
+par(mar=c(10,2,2,2))
+barplot(number.perfect.splits,
+main="Number of perfect splits vs feature",
+xlab="",ylab="Feature",las=2,col="wheat")
+```
+
+Step 5: Data Splicing
+
+Data Splicing is the process of splitting the data into a training set and a testing set. The training set is used to build the Decision Tree model and the testing set is used to validate the efficiency of the model.
+```{r}
+#data splicing
+set.seed(12345)
+train <- sample(1:nrow(mushrooms),size = ceiling(0.80*nrow(mushrooms)),replace = FALSE)
+# training set
+mushrooms_train <- mushrooms[train,]
+# test set
+mushrooms_test <- mushrooms[-train,]
+```
+
+# Setting penalty matrix
+
+To make this demo more interesting and to minimize the number of poisonous mushrooms misclassified as edible we will assign a penalty 10x bigger, than the penalty for classifying an edible mushroom as poisonous because of obvious reasons. 
+```{r}
+# penalty matrix
+penalty.matrix <- matrix(c(0,1,10,0), byrow=TRUE, nrow=2)
+```
+
+
+Step 6: Building a model
+```{r}
+# building the classification tree with rpart
+tree <- rpart(class~., data=mushrooms_train,parms = list(loss = penalty.matrix),
+method = "class")
+```
+
+Step 7: Visualising the tree
+
+In this step, we’ll be using the rpart.plot library to plot our final Decision Tree:
+
+
+```{r}
+# Visualize the decision tree with rpart.plot
+rpart.plot(tree, nn=TRUE)
+```
+
+Step 8: Testing the model
+```{r}
+#Testing the model
+pred <- predict(object=tree,mushrooms_test[-1],type="class")
+```
+
+Step 9: Calculating accuracy
+```{r}
+#Calculating accuracy
+t <- table(mushrooms_test$class,pred) 
+confusionMatrix(t)
+```
+
+
+```{r}
+
+```
+
+
+

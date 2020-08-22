@@ -1,0 +1,9 @@
+"0","# For column orientation (###) is the row and (---) is the column"
+"0","# For row orientation (###) is the column and (---) is the row"
+"0","my_dt <- read.csv(""german_credit_data.csv"")"
+"0",""
+"0","renderPlot({ggplot(my_dt, aes(x=Duration,y=Credit.amount, color=Risk )) +labs(title = ""History of Previous Loan Applicants"", x=""Duration (Month)"", y=""Credit Amount (#)"")+"
+"0","            geom_point()+theme_dark() +scale_x_continuous(breaks = seq(0,90,by=6))"
+"0","})"
+"1","<shiny.render.function> 
+"

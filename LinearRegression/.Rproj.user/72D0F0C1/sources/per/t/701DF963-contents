@@ -1,0 +1,201 @@
+---
+title: "LinearRegression_170820"
+author: "Johnson Adebayo"
+date: "8/17/2020"
+output: html_document
+---
+# Link: https://www.tutorialspoint.com/r/r_linear_regression.htm
+# Link: https://www.tutorialspoint.com/r/r_multiple_regression.htm
+# Link: https://www.machinelearningplus.com/machine-learning/complete-introduction-linear-regression-r/
+# Link: http://r-statistics.co/Linear-Regression.html
+
+# Linear Regression
+## Example 1: Simple Linear Regression
+```{r}
+# Create the predictor and response variable.
+x <- c(151, 174, 138, 186, 128, 136, 179, 163, 152, 131) # height
+y <- c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48) # Weight
+#z <- data.frame(x,y)
+
+```
+
+# Fitting the model
+```{r}
+relation <- lm(y~x)
+relation
+```
+
+
+# Visualize the Regression Graphically
+```{r}
+# Give the chart file a name.
+#png(file = "linearregression2.png")
+#png(file = "linearregression2.jpg")
+
+# Plot the chart.
+plot(y =y,x = x,col = "blue",main = "Height & Weight Regression",
+abline(lm(y~x)),cex = 1.5,pch = 16,ylab = "Weight in Kg",xlab = "Height in cm")
+
+# Save the file.
+#dev.off()
+```
+
+```{r}
+scatter.smooth(y = y,x=x, main = "Height Vs Weight Regression")
+```
+
+
+# Viewing the output of the model object
+
+## The intercept is -38.4551  and the slope of the x-variable is 0.6746
+## The equation is: y = 0.6746x + (-38.4551)
+
+```{r}
+#relation
+```
+
+# Model Summary
+
+## Since the p-value: 1.164e-06 is less than 0.05, that means there is significant relationship between y and x
+```{r}
+summary(relation)
+```
+
+# Making Prediction
+```{r}
+# Find weight of a person with height 180.
+newdata1 <- data.frame(x = 180)
+result <-  predict(relation,newdata1)
+print(result)
+```
+
+# Obtaining the residual or error (actual - predicted)
+```{r}
+relation$residuals
+```
+
+# Multiple Regression: Multiple regression is an extension of linear regression into relationship between more than two variables
+
+## In simple linear relation we have one predictor and one response variable, but in multiple regression we have more than one predictor variable and one response variable.
+
+## y = a + b1x1 + b2x2 +...bnxn. a is the intercept, b1 and b2 are the slopes of x1 and x2 respectively.
+
+## Example 2: The goal of the model is to establish the relationship between "mpg" as a response variable with "disp","hp" and "wt" as predictor variables. We create a subset of these variables from the mtcars data set for this purpose.
+
+```{r}
+data("mtcars")
+input <- mtcars[,c("mpg","disp","hp","wt")]
+print(head(input))
+
+```
+
+# Fitting the Model
+```{r}
+# Create the relationship model.
+model1 <- lm(mpg~disp+hp+wt, data = input)
+
+#model <- lm(mpg~., data = input)
+model1
+
+```
+
+```{r}
+summary(model1)
+```
+
+## Obtaining the coefficients of the model
+```{r}
+coef(model1)
+```
+
+## Create Equation for Regression Model
+## Y = a+Xdisp.x1+Xhp.x2+Xwt.x3
+or
+
+## Y = 37.105 + (-0.000937)*x1 +(-0.0311)*x2 + (-3.8008)*x3
+
+## For a car with disp = 221, hp = 102 and wt = 2.91 the predicted mileage is:
+## Y = 37.105+(-0.000937)*221+(-0.0311)*102+(-3.8008)*2.91 = 22.7104
+
+```{r}
+# Get the Intercept and coefficients as vector elements.
+cat("# # # # The Coefficient Values # # # ","\n")
+
+a <- coef(model)[1] # Obtaining the intercept which is on column 1
+print(a)
+
+Xdisp <- coef(model)[2] # Obtaining the slope of disp which is on column 2
+Xhp <- coef(model)[3] # Obtaining the slope of hp which is on column 3
+Xwt <- coef(model)[4] # Obtaining the slope of wt which is on column 4
+
+print(Xdisp)
+print(Xhp)
+print(Xwt)
+```
+
+# Creating dataframe of the test data
+```{r}
+disp <- c(221)
+hp <- c(102)
+wt <- c(2.91)
+
+test1 <- data.frame(disp,hp,wt)
+
+```
+
+# Making Prediction
+
+```{r}
+pred1 <- predict(model1, test1)
+pred1
+```
+
+
+
+```{r}
+modelSummary <- summary(model1)
+modelCoef <- modelSummary$coefficients
+```
+
+```{r}
+modelCoef
+
+```
+
+```{r}
+dispCoef <- modelCoef["disp","Estimate"]
+hpCoef <- modelCoef["hp","Estimate"]
+wtCoef <- modelCoef["wt","Estimate"]
+
+
+```
+
+```{r}
+dispCoef
+hpCoef
+wtCoef
+```
+
+# Evaluating the model Performance
+## For model comparison, the model with the lowest AIC and BIC score is preferred.
+```{r}
+AIC(model1)
+BIC(model1)
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+

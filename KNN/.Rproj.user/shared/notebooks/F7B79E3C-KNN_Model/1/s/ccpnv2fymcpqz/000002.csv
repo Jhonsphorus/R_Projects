@@ -1,0 +1,9 @@
+"0","pred2 <- predict(knn_model,test3)"
+"2","Warning message:
+"
+"2","package ‘ROCR’ was built under R version 3.6.3 
+"
+"0","confusionMatrix(pred2,test2$Creditability)"
+"2","Error in confusionMatrix(pred2, test2$Creditability) : 
+  could not find function ""confusionMatrix""
+"

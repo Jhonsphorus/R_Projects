@@ -1,0 +1,3 @@
+"0","loan <- read.csv(""german_credit.csv"")"
+"0","View(loan)"
+"0",""

@@ -1,0 +1,1 @@
+"0","boxplot(cars1$dist, main=""Distance"", sub=paste(""Outlier rows: "", boxplot.stats(cars1$dist)$out))  # box plot for 'distance'"

@@ -1,0 +1,1 @@
+"0","svm_pred <- predict(svm_Linear,testing)"

@@ -1,0 +1,67 @@
+---
+title: "Gauges Meter 2"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Data Entering Panel
+
+```{r}
+numericInput("rate","Enter Contact Rate", value = 0,min = 0,max = 100 )
+
+numericInput("rating", label = "Enter Rating Value:",value = 0,min = 0,max = 50)
+
+numericInput("cancellations", label = "Enter Cancellation Value:",value = 0,min = 0,max = 10)
+
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Rate Gauge
+
+```{r}
+renderGauge({
+  gauge(input$rate, min = 0, max = 100, symbol="%",label = "Contact Rate",gaugeSectors(success = c(80, 100), warning = c(40, 79), danger = c(0, 39)))
+  
+  
+})
+
+```
+
+### Rating Gauge
+
+```{r}
+renderGauge({
+  gauge(input$rating, label = "Average Rating",min = 0, max = 50, symbol='%',gaugeSectors(
+  success = c(41, 50), warning = c(21, 40), danger = c(0, 20)))
+})
+
+```
+
+### Cancellation Gauge
+```{r}
+
+renderGauge({
+  gauge(input$cancellations, label = "Cancellations",min = 0, max = 10, symbol = '%', gaugeSectors(
+  success = c(0, 2), warning = c(3, 6), danger = c(7, 10)))
+})
+
+```
+
+```{r}
+#rmarkdown::run("flexdashboard_guage.Rmd")
+
+```

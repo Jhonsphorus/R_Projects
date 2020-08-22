@@ -1,0 +1,7 @@
+"0",""
+"0",""
+"0","smple_short <- smple[,c(9,23)]"
+"0","smple_matrix <- data.matrix(smple_short)"
+"0",""
+"0","View(smple_matrix)"
+"0",""

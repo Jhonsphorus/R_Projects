@@ -1,0 +1,5 @@
+"0","# Create the predictor and response variable."
+"0","x <- c(151, 174, 138, 186, 128, 136, 179, 163, 152, 131) # height"
+"0","y <- c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48) # Weight"
+"0","#z <- data.frame(x,y)"
+"0",""

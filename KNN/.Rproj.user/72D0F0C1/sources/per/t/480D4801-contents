@@ -1,0 +1,146 @@
+---
+title: "KNN5_240720"
+author: "Johnson Adebayo"
+date: "7/24/2020"
+output: html_document
+---
+
+# https://dataaspirant.com/knn-implementation-r-using-caret-package/
+
+```{r}
+library(caret)
+
+```
+
+# Data Import
+
+```{r}
+#dataurl <- "https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"
+#download.file(url = dataurl, destfile = "wine.data")
+#wine_df <- read.csv("wine.data", header = FALSE)
+```
+
+```{r}
+#str(wine_df)
+```
+
+```{r}
+wine_df <- read.csv("wine.data", header = FALSE)
+```
+
+```{r}
+#wine_dt
+str(wine_df)
+```
+
+# Data Slicing
+
+Data slicing is a step to split data into train and test set
+```{r}
+set.seed(3033)
+intrain <- createDataPartition(y = wine_df$V1, p= 0.7, list = FALSE)
+training <- wine_df[intrain,]
+testing <- wine_df[-intrain,]
+
+```
+
+```{r}
+# For checking the dimensions of our training data frame and testing data frame
+dim(training)
+dim(testing)
+```
+
+```{r}
+#View(training)
+
+```
+
+# Preprocessing & Training
+
+# Preprocessing is all about correcting the problems in data before building a machine learning model using that data. Problems can be of many types like missing values, attributes with a different range, etc
+
+```{r}
+anyNA(wine_df)
+```
+
+# Wine Dataset summarized details (EDA)
+This gives us a basic idea about our dataset’s attributes range.
+
+```{r}
+summary(wine_df)
+```
+
+# NOTE: The summary above shows us that all the attributes have a different range. So, we need to standardize (normalize) our data. We can standardize data using caret’s preProcess() method.
+
+```{r}
+# Converting the target variable to factor
+training[["V1"]] = factor(training[["V1"]])
+
+testing[["V1"]] = factor(testing[["V1"]])
+
+
+
+#training$V1 <- as.factor(training$V1)
+```
+
+# Training the Knn model
+```{r}
+trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+
+set.seed(333)
+knn_fit <- train(V1~., data = training, method = "knn",trControl=trctrl,preProcess = c("center", "scale"), tuneLength = 10)
+
+```
+
+# Trained Knn model result
+```{r}
+knn_fit
+```
+
+# Plot showing variation in accuracy with respect to k(number of Nearest Neighbours). We can see variation in Accuracy w.r.t K value by plotting these in a graph. From the results, it automatically selects best k-value. Here, our training model is choosing k = 5 
+```{r}
+plot(knn_fit)
+```
+
+# Test Set Prediction: 
+```{r}
+knn_pred <- predict(knn_fit, testing)
+```
+
+# How Accurately our model is working?
+
+ It shows that our model accuracy for test set is 94.34%.
+```{r}
+confusionMatrix(knn_pred, testing$V1)
+#confusionMatrix(table(knn_pred, testing$V1))
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+

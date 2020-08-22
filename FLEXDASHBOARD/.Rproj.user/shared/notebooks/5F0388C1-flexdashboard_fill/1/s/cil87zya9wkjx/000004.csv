@@ -1,0 +1,4 @@
+"0","renderPlot({boxplot(Credit.amount~Risk, data=my_dt, main=""Boxplot of Credit Amount"",col=""Green"")"
+"0","})"
+"1","<shiny.render.function> 
+"

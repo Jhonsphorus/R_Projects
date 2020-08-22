@@ -1,0 +1,2 @@
+"0","mushrooms <- read.csv(""mushrooms.csv"", header = TRUE)"
+"0","#mushrooms$class <- ""target"""

@@ -1,0 +1,242 @@
+---
+title: "Stock Model Prediction"
+author: "Michael Olorunninwo"
+date: "4/29/2020"
+output:
+  html_document: default
+---
+
+# INTRODUCTION: 
+The dataset used to built this Stock Prediction Model is us_stock data. This dataset has 28 columns and 13354 data points (rows). It contains various industries of the stocks,sectors,stock prices (open, high and low), volume of stocks, divided yields and other valuable information.
+
+The approach adopted in this model involves calculating the stock performance percentage by using the open stock price, dividend yield to obtain this value. The stock performance percentage is then relates to the decision of either purchasing the stock or not (this is the outcome predicted by the model). The benchmark stock performance percentage set for purchasing a particular stock is 75%.
+
+
+The various steps used in this model include; importing the reqiured packages for building the model, creating connection to the database, loading the dataset from the sqlite database, cleaning the dataset by removing NA values, features selection to identify the variables that the outcome of the model depends on, splitting the dataset into train, query and test, fitting the model using Random forest and decision tree and finally predicting the outcome.
+
+# EXPLORATORY
+
+* Connect the `stock_model.sqlite` database
+
+```{r}
+# Loading the require packages
+library(GGally) # Package for checking correlation of features
+library(RSQLite) # Package for connecting to SQLite database
+library(knitr)  # Package for knitting to html, pdf etc
+library(tidyverse) # Package for visualization, data manipulation, transformation etc
+library(na.tools) # Package for checking NA, replacing NA etc
+library(rsample) # Package for splitting dataset into train and test
+library(caret) # Package that contain algorithms for modeling
+```
+
+
+
+```{r}
+# Creating connection to the database
+connector1 <- dbConnect(SQLite(), dbname = "stock_model.sqlite")
+#db <- dbConnect(RSQLite::SQLite(), dbname = "stock_portfolio.sqlite")
+```
+
+
+```{r}
+# Accessing the list of tables in the database
+table1 = dbListTables(connector1)
+#table2 <- dbListTables(db)
+table1
+
+```
+
+```{r}
+# Loading the tables in the database
+industry_major <- dbReadTable(connector1, "industry_major")
+industry_market_capitization <- dbReadTable(connector1, "industry_market_capitization")
+stocks <- dbReadTable(connector1, "us_stock")
+stock_price_history <- dbReadTable(connector1, "stock_price_history")
+
+View(industry_major)
+View(industry_market_capitization)
+View(us_stock)
+View(stock_price_history)
+```
+
+
+```{r}
+# Summarising the columns in the table us_stock
+summary(stocks)
+nrow(stocks)
+ncol(stocks)
+```
+
+## Data Cleaning
+```{r}
+# Checking for NA values in the dataset
+sapply(stocks, function(x) sum(is.na(x)))
+```
+
+```{r}
+# Replacing NA values in column pe_ratio with 0
+stocks$pe_ratio[is.na(stocks$pe_ratio)] <- 0
+# Replacing NA values in column dividend_yield with 0
+stocks$dividend_yield[is.na(stocks$dividend_yield)] <- 0
+# Removing NA values from the dataset
+stocks <- na.rm(stocks)
+
+```
+
+## Calculating the Stock Performance Percentage 
+```{r}
+#stocks$pe_ratio[is.na(stocks$pe_ratio)] <- 0
+stocks$open_now <- stocks$open
+stocks$dividend_yield <- stocks$dividend_yield
+#stocks$open_now[is.na(stocks$open_now)] <- stocks$open[is.na(stocks$open_now)]/2
+
+#stocks$dividend_yield[is.na(stocks$dividend_yield)] <- 0
+stocks$dividend_yield <- stocks$dividend_yield/100
+stocks$dividend_performance <- (stocks$dividend_yield*stocks$open)/4
+stocks$performance <- (stocks$open_now - stocks$open) + stocks$dividend_performance
+stocks$performance_percent <- stocks$performance/ stocks$open
+stocks$company_age <- as.numeric(format(Sys.Date(),'%Y')) - stocks$year_founded
+```
+
+
+
+```{r}
+# Obtaining the structure of the us_stock dataset
+str(stocks)
+
+```
+
+## Feature selection: 
+
+* Scatter  plot for checking relationship between stock performance percentage and other variables variables
+```{r}
+par(mfrow=c(3,2))
+
+plot(stocks$open,stocks$performance_percent, main = "Stock Performance Perc Vs open price")
+abline(lm(stocks$performance_percent~stocks$open), col="red")
+
+plot(stocks$dividend_yield,stocks$performance_percent,main = "Stock Performance Perc Vs Divident yield")
+abline(lm(stocks$performance_percent~stocks$dividend_yield), col="red")
+
+plot(stocks$pe_ratio,stocks$performance_percent, main = "Stock Performance Perc Vs pe_ratio")
+abline(lm(stocks$performance_percent~stocks$pe_ratio), col="red")
+
+plot(stocks$company_age,stocks$performance_percent,main = "Stock Performance Perc Vs company_age")
+abline(lm(stocks$performance_percent~stocks$company_age), col="red")
+
+plot(stocks$market_cap,stocks$performance_percent,main = "Stock Performance Perc Vs market cap")
+abline(lm(stocks$performance_percent~stocks$market_cap), col="red")
+
+plot(stocks$volume,stocks$performance_percent, main = "Stock Performance Perc Vs Volume")
+abline(lm(stocks$performance_percent~stocks$volume), col="red")
+
+#cor(stocks$volume,stocks$performance_percent)
+#cor(stocks$market_cap,stocks$performance_percent)
+#cor(stocks$company_age,stocks$performance_percent)
+#cor(stocks$pe_ratio,stocks$performance_percent)
+#cor(stocks$open,stocks$performance_percent)
+```
+
+* Visual Correlation Matrix: This plot shows visual relationship between variables in the dataset as either negative, positive, weak or stong depending on the colour.
+```{r}
+ggcorr(stocks)
+
+```
+
+
+```{r}
+# Viewing the us_stock (confirming the new columns added)
+View(stocks)
+```
+
+## Adding Outcome or dependent variable column and setting benchmark for purchasing stock 
+```{r}
+high <- quantile(stocks$performance_percent, .90)
+low <- quantile(stocks$performance_percent, .75)
+stocks <- stocks[stocks$performance_percent <= high,]
+#View(stocks)
+
+stocks$Buy <- 'No'
+stocks$Buy[stocks$performance_percent >= low] <- 'Yes'
+stocks$Buy <- factor(stocks$Buy, levels = c('No','Yes'))
+```
+
+
+# MODEL DEVELOPMENT
+
+## Splitting the dataset into train, query and test
+```{r}
+set.seed(100)
+train_test <- initial_split(stocks, prop = 0.8)
+train_test
+trainDt <- training(train_test)
+testDT <- testing(train_test)
+
+```
+
+## Creating control for the model
+
+The control is used to further divide the train dataset into 10 folds in which some folds is used as training data and part of it for validation and repeated 3 times by the process called repeated Cross-validation. The essence of this was to make the accuracy of the model high.
+```{r}
+# Creating control for the model
+control <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+```
+
+## The model is built using Random Forest algorithm which generates multiple trees from the dataset by randomly selecting features of the dataset.
+```{r}
+rf_model <- train(Buy~dividend_yield + pe_ratio + company_age + market_cap, data = trainDt,method="rf",trControl=control,preProcess=c("center","scale"))
+
+#tree_model <- train(Buy~dividend_yield + pe_ratio + company_age + market_cap, data = trainDt,method="rf",trControl=control,preProcess=c("center","scale"))
+```
+
+# MODEL APPLICATION
+
+The fitted model above is used to predict the outcome of the test data in order to confirm the accuracy of the model using a separate data.
+```{r}
+pred <- predict(rf_model,testDT)
+confusionMatrix(pred,testDT$Buy)
+
+```
+
+
+## Creating a table to show the actual and predicted status of stock purchase ("Yes" or "No")
+```{r}
+result <- data.frame(testDT$symbol,testDT$sector ,testDT$industry,testDT$Buy,pred)
+colnames(result) <- c("symbol","sector","industry","Actual_Buy","Predicted_Buy")
+View(result)
+```
+
+# CONCLUSION:
+
+
+The result of this model shows that there is significant relationship between purchasing stock and dividend yield, pe_ratio, company age and market capitalization. This is confirmed from the p-value obtained that is less than 2.2e-16 (p-value < 2.2e-16) which makes me reject the null hypothesis and accept the alternate hypothesis.
+The confidence interval of this model is 95%
+
+Question: Would you use this to make stock purchase decisions? Yes with the level of accuracy obtained from the prediction of the model.
+
+```{r}
+v <- c(1,4,80,20)
+q <- c(4,10,5,7)
+p <- data.frame(v,q)
+colnames(p) <- c("col1","col2")
+```
+
+```{r}
+p$col3 <- "No"
+p$col3[p$col1<p$col2] <- "Yes"
+p$col3 <- as.factor(p$col3)
+
+p
+
+```
+
+
+```{r}
+str(p)
+```
+
+
+
+
+
+

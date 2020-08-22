@@ -1,0 +1,4 @@
+"0","library(e1071)"
+"0","#model <- svm(Y ~ X , data)"
+"0","#predictedY <- predict(model, data)"
+"0","#points(data$X, predictedY, col = ""red"", pch=4)"

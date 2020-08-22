@@ -1,0 +1,5 @@
+"0","library(rsample)"
+"0","set.seed(100)"
+"0","train_test <- initial_split(b_canc, p=0.7)"
+"0","train_Data <- training(train_test)"
+"0","test_Data <- testing(train_test)"

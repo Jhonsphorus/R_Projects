@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591739114178.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2061660537",
+    "id" : "520B953",
+    "lastKnownWriteTime" : 1591747941,
+    "last_content_update" : 1591747941643,
+    "path" : "~/RProject/Personal_Practice_New/Nigeria_Telecom_Dashboard/Prac1.Rmd",
+    "project_path" : "Prac1.Rmd",
+    "properties" : {
+        "cursorPosition" : "13,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

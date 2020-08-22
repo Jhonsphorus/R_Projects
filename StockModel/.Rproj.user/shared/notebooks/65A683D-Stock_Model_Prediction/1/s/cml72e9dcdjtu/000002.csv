@@ -1,0 +1,3 @@
+"0","result <- data.frame(testDT$symbol,testDT$sector ,testDT$industry,testDT$Buy,pred)"
+"0","colnames(result) <- c(""symbol"",""sector"",""industry"",""Actual_Buy"",""Predicted_Buy"")"
+"0","View(result)"

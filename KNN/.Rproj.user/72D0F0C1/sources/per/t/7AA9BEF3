@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1594571412112.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3164058443",
+    "id" : "7AA9BEF3",
+    "lastKnownWriteTime" : 1595605995,
+    "last_content_update" : 1595605996016,
+    "path" : "~/RProject/Personal_Practice_New/KNN/KNN3_120720.Rmd",
+    "project_path" : "KNN3_120720.Rmd",
+    "properties" : {
+        "cursorPosition" : "24,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

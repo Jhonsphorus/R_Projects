@@ -1,0 +1,16 @@
+"0","library(flexdashboard)"
+"2","package ‘flexdashboard’ was built under R version 3.6.3"
+"2","Registered S3 methods overwritten by 'htmltools':
+  method               from         
+  print.html           tools:rstudio
+  print.shiny.tag      tools:rstudio
+  print.shiny.tag.list tools:rstudio
+"
+"0","library(ggplot2)"
+"2","package ‘ggplot2’ was built under R version 3.6.3"
+"2","Registered S3 method overwritten by 'dplyr':
+  method           from
+  print.rowwise_df     
+"
+"0","library(shiny)"
+"2","package ‘shiny’ was built under R version 3.6.3"

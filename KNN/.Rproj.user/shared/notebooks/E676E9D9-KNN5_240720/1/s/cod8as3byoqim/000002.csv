@@ -1,0 +1,8 @@
+"0","# Converting the target variable to factor"
+"0","training[[""V1""]] = factor(training[[""V1""]])"
+"0",""
+"0","testing[[""V1""]] = factor(testing[[""V1""]])"
+"0",""
+"0",""
+"0",""
+"0","#training$V1 <- as.factor(training$V1)"

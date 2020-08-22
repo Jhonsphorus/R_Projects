@@ -1,0 +1,1 @@
+"0","boxplot(Credit.amount~Risk, data=my_dt, main=""Boxplot of Credit Amount"",col=""Green"")"

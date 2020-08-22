@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1590874563741.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1157430168",
+    "id" : "BFE39429",
+    "lastKnownWriteTime" : 1590890025,
+    "last_content_update" : 1590890025341,
+    "path" : "~/RProject/Personal_Practice_New/FLEXDASHBOARD2/NBA_Player_Dashboard.Rmd",
+    "project_path" : "NBA_Player_Dashboard.Rmd",
+    "properties" : {
+        "cursorPosition" : "5,16",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

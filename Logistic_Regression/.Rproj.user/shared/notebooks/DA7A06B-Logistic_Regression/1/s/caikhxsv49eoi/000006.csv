@@ -1,0 +1,6 @@
+"0","library(caret)"
+"0","set.seed(10)"
+"0","train_ratio <- createDataPartition(b_canc$Class, p=0.7,list = FALSE)"
+"0","trainData <- b_canc[train_ratio,]"
+"0","testData <- b_canc[-train_ratio,]"
+"0",""

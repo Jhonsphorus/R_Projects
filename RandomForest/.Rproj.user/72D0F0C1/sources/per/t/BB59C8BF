@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587236857397.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "BB59C8BF",
+    "lastKnownWriteTime" : 8026363914660965410,
+    "last_content_update" : 1587236857397,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "4712CA77",
+        "caption" : "survival_table",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=survival_table&cache_key=4712CA77",
+        "displayedObservations" : "393",
+        "environment" : "",
+        "expression" : "survival_table",
+        "object" : "survival_table",
+        "preview" : "0",
+        "totalObservations" : "393",
+        "variables" : "4"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

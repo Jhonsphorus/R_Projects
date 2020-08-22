@@ -1,0 +1,5 @@
+"0","# training[[""V14""]] = factor(training[[""V14""]])"
+"0",""
+"0","training$target <- as.factor(training$target)"
+"0","testing$target <- as.factor(testing$target)"
+"0",""

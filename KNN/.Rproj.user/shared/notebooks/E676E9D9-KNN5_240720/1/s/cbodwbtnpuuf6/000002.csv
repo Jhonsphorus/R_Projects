@@ -1,0 +1,5 @@
+"0","trctrl <- trainControl(method = ""repeatedcv"", number = 10, repeats = 3)"
+"0",""
+"0","set.seed(333)"
+"0","knn_fit <- train(V1~., data = training, method = ""knn"",trControl=trctrl,preProcess = c(""center"", ""scale""), tuneLength = 10)"
+"0",""

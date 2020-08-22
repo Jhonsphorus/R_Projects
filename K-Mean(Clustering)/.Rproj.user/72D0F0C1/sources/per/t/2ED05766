@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588979219876.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "2ED05766",
+    "lastKnownWriteTime" : 11259471521185893,
+    "last_content_update" : 1588979219876,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "39D395DC",
+        "caption" : "movie_metadata",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=movie_metadata&cache_key=39D395DC",
+        "displayedObservations" : "5043",
+        "environment" : "",
+        "expression" : "movie_metadata",
+        "object" : "movie_metadata",
+        "preview" : "0",
+        "totalObservations" : "5043",
+        "variables" : "28"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

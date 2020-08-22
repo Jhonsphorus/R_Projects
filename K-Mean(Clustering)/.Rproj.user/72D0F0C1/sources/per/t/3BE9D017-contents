@@ -1,0 +1,119 @@
+---
+title: "K-Mean(Clustering)"
+author: "Johnson Adebayo"
+date: "5/8/2020"
+output: html_document
+---
+
+
+```{r}
+#library(readr)
+
+movie_metadata <- read.csv("movie_metadata.csv")
+```
+
+
+```{r}
+View(movie_metadata)
+
+```
+
+
+```{r}
+
+movie <- data.matrix(movie_metadata)
+movie <- na.omit(movie)
+```
+
+Step 3. In this example, I have taken first 500 values from the data set for analysis.
+```{r}
+smple <- movie[sample(nrow(movie),500),]
+
+```
+
+
+Step 4. Further, with the R code below, you can take two attributes budget and gross from the dataset to make clusters.
+```{r}
+
+
+smple_short <- smple[,c(9,23)]
+smple_matrix <- data.matrix(smple_short)
+
+View(smple_matrix)
+
+```
+
+Step 5. Now, let’s determine the number of clusters.
+
+#NOTE: As you can see, there is a sudden drop in the value of WSS (within sum of squares) as the number of clusters increase from 1 to 3. Therefore, the bend at k=3 gives the stability in the value of WSS. We need to strike a balance between k and WSS. So, in this case, it comes at k=3.
+
+```{r}
+
+
+wss <- (nrow(smple_matrix)-1)*sum(apply(smple_matrix,2,var))
+
+for (i in 2:15) wss[i]<-sum(kmeans(smple_matrix,centers=i)$withinss)
+
+plot(1:15, wss, type="b", xlab="Number of Clusters", ylab="Within Sum of Squares")
+
+```
+
+Step 6. Now, with this cleaned data, I will apply inbuilt kmeans() function to form clusters.   
+
+
+```{r}
+  
+
+cl <- kmeans(smple_matrix,3,nstart=25)
+
+# You can plot the graph and cluster centroid using the following command.
+
+plot(smple_matrix, col =(cl$cluster+1) , main="k-means result with 2 clusters", pch=1, cex=1, las=1)
+
+points(cl$centers, col = "black", pch = 17, cex =2)
+text(cl$centers, labels=c("Cluster1","Cluster2","Cluster3"))
+
+```
+
+# Step 7. Now, I will analyze how good is my cluster formation by using the command cl. It gives the following output
+```{r}
+cl
+
+```
+
+```{r}
+(cl$betweenss/cl$totss)*100
+
+```
+
+Step 8. For a more in-depth look at the clusters, we can examine the coordinates of the cluster centroids using the cl$centers component, which is as follows for gross and budget (in million).
+```{r}
+cl$centers
+
+```
+
+
+Step 9. Further, we can also examine how the cluster assignment relates to individual characteristics like director_facebook_likes(column 5) and movie_facebook_likes(column 28). I have taken the following 20 sample values.
+```{r}
+sm <- smple[1:20,c(5,28)]
+sm
+
+```
+
+```{r}
+aggregate(data=smple, movie_facebook_likes ~ cl$cluster,mean)
+
+```
+
+```{r}
+aggregate(data=smple, director_facebook_likes~cl$cluster, mean)
+#aggregate(data=smple, director_facebook_likes ~ cl$cluster,sum)
+
+```
+
+```{r}
+
+
+```
+
+

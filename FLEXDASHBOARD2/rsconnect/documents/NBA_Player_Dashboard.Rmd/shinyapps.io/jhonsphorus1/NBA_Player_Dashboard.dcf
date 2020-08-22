@@ -1,0 +1,12 @@
+name: NBA_Player_Dashboard
+title: NBA_Player_Dashboard
+username:
+account: jhonsphorus1
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2383346
+bundleId: 3209423
+url: https://jhonsphorus1.shinyapps.io/NBA_Player_Dashboard/
+when: 1590888085.97023
+asMultiple: FALSE
+asStatic: FALSE

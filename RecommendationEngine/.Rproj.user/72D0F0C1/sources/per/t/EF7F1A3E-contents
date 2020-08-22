@@ -1,0 +1,255 @@
+---
+title: "PhorusRec"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    social: menu
+    source_code: embed
+    logo: logo3.png
+    theme: yeti
+    storyboard: TRUE
+runtime: shiny 
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+library(shinythemes)
+library(caret)
+library(rsample)
+library(googledrive)
+library(gargle)
+library(jsonlite)
+library(knitr)
+library(readxl)
+library(tidyverse)
+library(htmltools)
+library(proxy)
+library(recommenderlab)
+library(reshape2)
+library(dplyr)
+
+# source_code: embed # For adding source codes 
+```
+
+```{r}
+# Loading dataset
+movies2 <- read.csv("movies.csv", header = TRUE, stringsAsFactors=FALSE)
+ratings <- read.csv("ratings.csv", header = TRUE)
+```
+
+
+```{r}
+#movie_recommendation <- function(select,select1,select2, rating1,rating2,rating3) {
+movie_recommendation <- function(input1,input2,input3, input4,input5,input6) {
+  row_num <- which(movies2[,2] == input1) # Locating the position/row of the first selected movie
+  row_num2 <- which(movies2[,2] == input2) # Locating the position/row of the second selected movie
+  row_num3 <- which(movies2[,2] == input3) # # Locating the position/row of the third selected movie
+  
+  userSelect <- matrix(NA,9724,611) # Creating a matrix of the same number of columns(movies) as we have in movies2
+  userSelect[row_num] <- input4 # hard code first selection to rating 5 (assigning rating to the first movie selection)
+  userSelect[row_num2] <- input5# hard code second selection to rating 4 (assigning rating to the second selected movie )
+  userSelect[row_num3] <- input6 # hard code third selection to rating 3 (assigning rating to the third selected movie )
+  userSelect <- t(userSelect) # t() transpose function, to make the rows of the assigned movies the same as the columns in order to conform to the ratingsmat
+  
+  ratingmat <- dcast(ratings, userId~movieId, value.var = "rating", na.rm=FALSE)
+  ratingmat <- ratingmat[,-1] # remove userIds
+  colnames(userSelect) <- colnames(ratingmat) # Making their colnames the same for convenient rbind
+  ratingmat2 <- rbind(userSelect,ratingmat) # Combining the ratingmat dataset to the userSelect 
+  ratingmat2 <- as.matrix(ratingmat2) # Converting "ratingmat2" to matrix to make it fit for the model
+  
+  #Convert rating matrix into a sparse matrix
+  ratingmat2 <- as(ratingmat2, "realRatingMatrix") # Converting "ratingmat2" to "realRatingMatrix" object to make it fit for the model
+  
+  #Create Recommender Model. "UBCF" stands for user-based collaborative filtering
+  recommender_model <- Recommender(ratingmat2, method = "UBCF",param=list(method="Cosine",nn=30))
+  recom <- predict(recommender_model, ratingmat2[1], n=10) # ratingmat2[1], that means it should predict for the values in row 1 as the test data
+  recom_list <- as(recom, "list") # Converting the predicted object "recom" to list for easy understanding
+  
+  # Creating matrix that will store the recommendation and converting to dataframe (You can omit the NA)
+  recom_result <- data.frame(matrix(NA,10,3)) # Creating dataframe to store the predicted values
+  for (i in c(1:10)){ # Looping through the predicted ratings in order to convert it to movies values
+    recom_result[i,c(1:3)] <- movies2[as.integer(recom_list[[1]][i]),c(1:3)]
+    
+  }
+  
+  recom_result$movie
+  colnames(recom_result) <- c("S/N","Recommended Movies for Your Purchase", "Genres")
+  recom_result$movie_ID <- recom_result["S/N"]
+  
+  recom_result["S/N"] <- c(1:10) #'S/N'is representing the 'moviesId', which I changed to vector btw c(1:10)
+  return(recom_result)
+}
+
+```
+
+About{data-navmenu="Menu"}
+===============================================================================
+
+**ABOUT**
+
+*PhorusRec is a movie recommendation platform that recommends ten movies to users based on their movies selection and ratings*
+
+*The datasets used in building model that this platform makes recommendation and prediction with was gotten from https://www.kaggle.com/*
+
+**Application of PhorusRec (Recommendation Engine)**
+
+*The same algorithm and concept used in building the model used in PhorusRec can also be use in the following sectors:*
+
+* *e-commerce - To recommend similar products to customers.*
+* *Marketing - To market products to customers.*
+* *Banking - To suggest investment schemes to customers.*
+* *Insurance - To recommend insurance packages to clients*
+* *Real Estate - To suggest house schemes to customers.*
+* *Movie house - To suggest movies to viewers.*
+
+**The essence of this project are as follow: **
+
+* *To showcase my ability of using both Flexdashboard and shiny (R packages) for building an interactive web application.*
+* *To build model which suggests related products available on the platform based on the selection and rating by the customers (users of the platform).*
+* *To showcase my machine learning and analytics skills.*
+* *To apply my analytics and design thinking skills in solving real life problems.*
+
+
+
+
+Movies Recommendation {.storyboard data-navmenu="Menu"}
+===============================================================================
+
+Movies Selection Panel {.sidebar data-width=350}
+-------------------------------------------------------------------------------
+**Movies Selection Panel**
+
+
+```{r}
+selectInput("select1", label = "Select First Movie", choices = as.character(movies2$title[1:2000]))
+numericInput("rating1", label ="Rate First Movie",value = 1, min = 1, max = 5 )
+            
+selectInput("select2", label ="Select Second Movie",choices = as.character(movies2$title[1:2000]))
+numericInput("rating2", label ="Rate Second Movie",value = 1, min = 1, max = 5 )
+            
+selectInput("select3", label ="Select Third Movie",choices = as.character(movies2$title[1:2000]))
+numericInput("rating3", label ="Rate Third Movie",value = 1, min = 1, max = 5 )
+submitButton("Submit") 
+#actionButton("submit", "Submit")
+
+
+```
+
+
+
+
+### SUGGESTED MOVIES SECTION
+
+```{r}
+source("recommender.R")
+renderTable({
+        movie_recommendation(input$select1, input$select2, input$select3,input$rating1,input$rating2,input$rating3)
+    })
+    
+
+```
+
+
+
+Contact-us{.storyboard data-navmenu=""}
+===============================================================================
+ 
+Sidebar {.sidebar data-width=300}
+----------------------------------------------
+
+**Get in touch with us for your next analytics project**
+
+
+```{r}
+textInput(inputId ="name2", label = "",placeholder = "Full Name*" )
+textInput("company", label = "",placeholder = "Company")
+textInput(inputId ="email", label = "",placeholder = "Email*" )
+textInput("phone",label="",placeholder = "Phone" )
+textInput(inputId ="subject", label = "",placeholder = "Subject*" )
+#textInput(inputId ="message", label = "",placeholder = "Message*" )
+textAreaInput(inputId ="message", label = "",placeholder = "Message*")
+actionButton("submit2", "Submit") 
+
+```
+
+
+```{r}
+
+useroutput <- eventReactive(input$submit2,{
+  if(input$name2 != "" & input$company!= "" & input$email!= "" & input$phone!= "" & input$subject != "" & input$message != ""  ){
+    userData1 <- data.frame(input$name2,input$company,input$email,input$phone,input$subject,input$message)
+    colnames(userData1) <- c("Name","Company","Email","Phone","Subject","Message")
+  }
+  return(userData1)
+})
+
+```
+
+### Contact
+
+```{r}
+img(src="email1.png", height=20, width=20)
+
+```
+
+b.adejohnson@hotmail.com
+
+
+```{r}
+img(src="phone1.png", height=20, width=20)
+
+```
+
++2349099921571
+
+```{r}
+img(src="twitter.png", height=20, width=20)
+
+```
+
+@jhonsphorus
+
+```{r}
+
+img(src="linkedin.png", height=20, width=20)
+
+```
+
+https://www.linkedin.com/in/johnson-adebayo/
+
+```{r}
+userData <- read.csv("userentry.csv")
+
+
+renderTable({
+  
+  userData <- rbind(userData, useroutput())
+  
+  # To remove the old "userentry.csv" file
+  file.remove("userentry.csv")
+  # To write and replace the old "userentry.csv" file
+  write.csv(userData,"userentry.csv", row.names = FALSE)
+  #write.csv(useroutput(),"userentry.csv", row.names = FALSE)
+  #useroutput()
+})
+
+```
+
+```{r}
+#drive_auth()  
+
+#drive_put(media ="C:/Users/usewr/Documents/RProject/Personal_Practice_New/Afriloan/userentry.csv",path = as_id("1G-TakNykaTlaeJtxFd9Q5xf98Bj3ihg4"),name ="USERDATA3",type ="spreadsheet")
+
+```
+
+
+```{r}
+
+#rmarkdown::run("PhorusRec.Rmd")
+```
+
+
+
+

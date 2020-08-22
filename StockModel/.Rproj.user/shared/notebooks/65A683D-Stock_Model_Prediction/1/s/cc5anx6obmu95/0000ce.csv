@@ -1,0 +1,2 @@
+"0",""
+"0","plot(stocks$market_cap,stocks$performance_percent,main = ""Stock Performance Perc Vs market cap"")"

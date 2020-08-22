@@ -1,0 +1,12 @@
+name: RecommendationApp
+title: RecommendationApp
+username:
+account: phorus
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2640539
+bundleId: 3480680
+url: https://phorus.shinyapps.io/RecommendationApp/
+when: 1596682686.50602
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,0 +1,20 @@
+"0","#Loading libraries"
+"0","library(rpart)"
+"0","library(caret)"
+"2","Loading required package: lattice
+"
+"2","Loading required package: ggplot2
+"
+"2","package ‘ggplot2’ was built under R version 3.6.3"
+"2","Registered S3 method overwritten by 'dplyr':
+  method           from
+  print.rowwise_df     
+"
+"2","Registered S3 method overwritten by 'data.table':
+  method           from
+  print.data.table     
+"
+"0","library(rsample)"
+"2","package ‘rsample’ was built under R version 3.6.3"
+"0","library(rpart.plot,quietly = TRUE)"
+"2","package ‘rpart.plot’ was built under R version 3.6.2"

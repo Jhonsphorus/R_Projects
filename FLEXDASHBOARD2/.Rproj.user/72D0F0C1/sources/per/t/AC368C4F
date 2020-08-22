@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591042839411.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AC368C4F",
+    "lastKnownWriteTime" : 3327647950551527036,
+    "last_content_update" : 1591042839411,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "8E8C261",
+        "caption" : "WorldPhones",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=WorldPhones&cache_key=8E8C261",
+        "displayedObservations" : 7,
+        "environment" : "",
+        "expression" : "WorldPhones",
+        "object" : "WorldPhones",
+        "preview" : 0,
+        "totalObservations" : 7,
+        "variables" : 7
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

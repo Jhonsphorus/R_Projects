@@ -1,0 +1,7 @@
+"0","# Replacing NA values in column pe_ratio with 0"
+"0","stocks$pe_ratio[is.na(stocks$pe_ratio)] <- 0"
+"0","# Replacing NA values in column dividend_yield with 0"
+"0","stocks$dividend_yield[is.na(stocks$dividend_yield)] <- 0"
+"0","# Removing NA values from the dataset"
+"0","stocks <- na.rm(stocks)"
+"0",""

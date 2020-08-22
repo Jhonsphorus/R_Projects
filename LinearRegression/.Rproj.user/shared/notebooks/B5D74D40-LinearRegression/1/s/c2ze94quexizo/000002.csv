@@ -1,0 +1,8 @@
+"0","Model_Summary <- summary(linear_model)"
+"0","Model_Coefficients <- Model_Summary$coefficients"
+"0","std_error <- Model_Coefficients[""speed"", ""Std. Error""]"
+"0","print(std_error)"
+"1","[1]"
+"1"," 0.4155128"
+"1","
+"

@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1592088615150.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "741585265",
+    "id" : "E10011B2",
+    "lastKnownWriteTime" : 1592097278,
+    "last_content_update" : 1592097278402,
+    "path" : "~/RProject/Personal_Practice_New/Africa_Colonization/AfriCol.Rmd",
+    "project_path" : "AfriCol.Rmd",
+    "properties" : {
+        "cursorPosition" : "10,14",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

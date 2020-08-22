@@ -1,0 +1,204 @@
+---
+title: "SVM"
+author: "Johnson Adebayo_SCV1007 (Cohort 1)"
+date: "4/8/2020"
+output: html_document
+---
+
+# https://www.edureka.co/blog/support-vector-machine-in-r/
+
+# SUPPORT VECTOR MACHINE (SVM)
+SVM is used for both classification and regression prediction.
+
+```{r}
+library(rsample)
+library(caret)
+```
+
+Loading dataset
+```{r}
+heart <- read.csv("heart.csv", header = T)
+View(heart)
+```
+
+Checking for NA in dataset
+```{r}
+anyNA(heart) # Method 1
+
+sapply(heart, function(x) {sum(is.na(x)) }) # method 2
+```
+
+
+```{r}
+str(heart)
+```
+
+```{r}
+heart$target <- as.factor(heart$target)
+str(heart)
+
+```
+
+Splitting dataset into training and testing data
+```{r}
+set.seed(200)
+intrain <- createDataPartition(y=heart$target, p=0.7,list = FALSE)
+training <- heart[intrain,]
+testing <- heart[-intrain,]
+```
+
+Confirming the dimension of training and testing data
+```{r}
+dim(training)
+dim(testing)
+```
+
+
+```{r}
+summary(heart)
+```
+
+
+Fitting the model:  This is the stage of training our model or algorithm with the training dataset.
+
+# creating control object for the model
+```{r}
+trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+
+```
+
+
+```{r}
+set.seed(200)
+svm_Linear <- train(target~.,data = training, trControl=trctrl,method="svmLinear", preProcess=c("center","scale"),tuneLength=10)
+
+svm_Linear
+```
+
+```{r}
+
+```
+
+Making prediction
+```{r}
+svm_pred <- predict(svm_Linear,testing)
+```
+
+# Bar Plot of the Actual Vs Predicted of the categorical "target"
+```{r}
+par(mfrow=c(1,2))
+plot(testing$target, main="Actual", col=c("red","green") )
+plot(svm_pred, main="Predicted",col=c("red","green"))
+```
+
+# creating confusion matrix to check for accuracy, specificity and sensitivity of the model
+```{r}
+confusionMatrix(table(svm_pred, testing$target))
+#table(svm_pred,testing$target)
+```
+
+Creating dataframe comparing actual and predicted 
+```{r}
+df_target <- data.frame(testing$target,svm_pred)
+colnames(df_target) <- c("Actual","Predicted")
+View(df_target)
+```
+
+# IMPROVING THE PERFORMANCE OF THE MODEL:
+
+Using Grid Search: This is one of the process of parameter tunning in order to improve the performance of the model. And you are checking for the grid with the best performance.
+
+With this process of grid search there is increase in the accuracy from 83.33% to 85.56%
+
+```{r}
+# Creating the grid search
+grid <- expand.grid(C = c(0,0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2,5))
+
+```
+
+
+```{r}
+set.seed(50)
+svm_Linear_Grid <- train(target~., data = training, method ="svmLinear",trControl=trctrl,
+preProcess = c("center", "scale"),tuneGrid=grid,tuneLength = 10)
+svm_Linear_Grid
+plot(svm_Linear_Grid)
+```
+
+
+```{r}
+svm2_pred <- predict(svm_Linear_Grid,testing)
+confusionMatrix(table(svm2_pred,testing$target))
+```
+
+# Bar Plot of the Actual Vs Predicted of the categorical "target"
+```{r}
+par(mfrow=c(1,2))
+plot(testing$target, main="Actual", col=c("red","green") )
+plot(svm2_pred, main="Predicted",col=c("red","green"))
+```
+
+
+# NOTE: SUPPORT VECTOR REGRESSION (SVR): The code below is an example of using SVM to fit regression using package e1071 which contain the function svm(). 
+```{r}
+library(e1071)
+#model <- svm(Y ~ X , data)
+#predictedY <- predict(model, data)
+#points(data$X, predictedY, col = "red", pch=4)
+```
+
+
+```{r}
+cars <- datasets::cars
+```
+
+Fitting the SVR model
+```{r}
+# It is optional to specify that it is regression that you want the model to run.
+svr_model <- svm(dist~speed, data=cars) 
+svr_model
+```
+
+Prediction with the fitted SVR
+```{r}
+svr_pred <- predict(svr_model,cars)
+```
+
+```{r}
+svr_df <- data.frame(cars$dist,svr_pred)
+colnames(svr_df) <- c("Actual_Distsance","Predicted_Destance")
+View(svr_df)
+```
+
+```{r}
+#points()
+points(cars$speed,svr_pred,col="blue", pch=4)
+#plot(svr_pred+cars$dist,cars$speed, col=c("blue"))
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+

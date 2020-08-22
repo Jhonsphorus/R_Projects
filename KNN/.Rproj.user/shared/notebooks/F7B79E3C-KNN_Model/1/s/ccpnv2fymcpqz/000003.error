@@ -1,0 +1,1 @@
+{"frames":[],"message":"Error in confusionMatrix(pred2, test2$Creditability) : \n  could not find function \"confusionMatrix\"\n"}

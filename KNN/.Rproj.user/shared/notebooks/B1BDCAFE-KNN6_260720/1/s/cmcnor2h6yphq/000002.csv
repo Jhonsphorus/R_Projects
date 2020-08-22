@@ -1,0 +1,1 @@
+"0","featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = ""density"", strip=strip.custom(par.strip.text=list(cex=.7)),scales = list(x = list(relation=""free""), y = list(relation=""free"")))"

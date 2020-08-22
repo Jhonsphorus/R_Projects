@@ -1,0 +1,4 @@
+"0","# k= 26.45 i.e either 26 or 27"
+"0","knn.26 <- knn(train=train.loan, test=test.loan, cl=train.loan_labels, k=26)"
+"0","knn.27 <- knn(train=train.loan, test=test.loan, cl=train.loan_labels, k=27)"
+"0",""

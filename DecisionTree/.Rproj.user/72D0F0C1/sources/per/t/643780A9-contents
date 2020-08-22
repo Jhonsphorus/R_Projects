@@ -1,0 +1,141 @@
+---
+title: "DecisionTree2"
+author: "Johnson Adebayo_SCV1007 (Cohort 1)"
+date: "4/16/2020"
+output: html_document
+---
+
+Step 1: Install and load libraries
+```{r}
+#Loading libraries
+library(rpart)
+library(caret)
+library(rsample)
+library(rpart.plot,quietly = TRUE)
+```
+
+Step 2: Load the data set
+```{r}
+mushrooms <- read.csv("mushrooms.csv", header = TRUE)
+#mushrooms$class <- "target"
+```
+
+
+```{r}
+
+str(mushrooms)
+
+```
+
+
+```{r}
+nrow(mushrooms)
+ncol(mushrooms)
+```
+
+
+Step 3: Data Cleaning
+```{r}
+# Checking NULL values
+sapply(mushrooms, function(x) {sum(is.na(x)) })
+```
+
+
+```{r}
+# deleting redundant variable `veil.type` because it is a categorical variable with level=1
+mushrooms$veil.type <- NULL
+
+```
+
+
+```{r}
+# Confirming the deleted column
+str(mushrooms)
+```
+
+Step 4: Data Exploration and Analysis
+
+The above output shows that the mushrooms with odor values ‘c’, ‘f’, ‘m’, ‘p’, ‘s’ and ‘y’ are clearly poisonous. And the mushrooms having almond (a) odor (400) are edible. Such observations will help us to predict the output class more accurately.
+```{r}
+# analyzing the odor variable
+table(mushrooms$class,mushrooms$odor)
+table(mushrooms$class,mushrooms$habitat)
+table(mushrooms$class,mushrooms$population)
+table(mushrooms$class,mushrooms$veil.color)
+```
+
+Step 5: Data Splicing
+
+Data Splicing is the process of splitting the data into a training set and a testing set. The training set is used to build the Decision Tree model and the testing set is used to validate the efficiency of the model.
+
+# Splitting dataaset into training and test
+```{r}
+set.seed(100)
+train_test <- initial_split(mushrooms, p=0.8)
+train_mushroom <- training(train_test)
+test_mushroom <- testing(train_test)
+```
+
+
+
+```{r}
+# number of rows in train and test dataset
+#train_test
+#View(train_mushroom)
+#View(test_mushroom)
+```
+
+Step 6: Building a model
+```{r}
+# Setting control for the model
+control <- trainControl(method ="repeatedcv",number =10, repeats =3)
+```
+
+# This is optional: it is used to check how each of the features is related to the outcome. it is expressed in fraction
+```{r}
+control <- trainControl(method="repeatedcv", number=10, repeats=3)
+model <- train(class~., data=train_mushroom, method="lvq", preProcess="scale", trControl=control)
+
+importance <- varImp(model, scale = F)
+plot(importance)
+```
+
+# Fitting the model
+```{r}
+DT_model <- train(class ~ ., data=train_mushroom,method="rpart",preProcess=c("center","scale"),trControl=control,tuneLength=20)
+```
+
+Step 8: Testing the model
+```{r}
+# pred <- predict(DT_model,test_mushroom[,-1]) # I'm removing the column of the response variable so that the model does not see the column while predicting
+
+pred <- predict(DT_model,test_mushroom)
+
+```
+
+
+```{r}
+actual_predicted <- data.frame(test_mushroom$class,pred)
+colnames(actual_predicted) <- c("Actual_class","Predicted_class")
+View(actual_predicted)
+table(pred,test_mushroom$class)
+```
+
+Step 9: Calculating accuracy
+```{r}
+confusionMatrix(table(pred,test_mushroom$class))
+```
+
+
+
+```{r}
+
+```
+
+
+
+```{r}
+
+```
+
+

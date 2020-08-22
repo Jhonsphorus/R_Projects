@@ -1,0 +1,7 @@
+"0","#data splicing"
+"0","set.seed(12345)"
+"0","train <- sample(1:nrow(mushrooms),size = ceiling(0.80*nrow(mushrooms)),replace = FALSE)"
+"0","# training set"
+"0","mushrooms_train <- mushrooms[train,]"
+"0","# test set"
+"0","mushrooms_test <- mushrooms[-train,]"

@@ -1,0 +1,78 @@
+---
+title: "NBA Players Analysis"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    social: menu
+    source_code: embed
+    
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(shiny)
+library(knitr)
+library(biclust)
+library(heatmaply)
+library(flexdashboard)
+library(ggpubr)
+
+# Loading the dataset from the source
+#url <- "http://datasets.flowingdata.com/ppg2008.csv"
+#nba_players <- read.csv(url, row.names = 1)
+
+# Giving name to the rows
+nba_players <- read.csv("ppg2008.csv", row.names = 1)
+
+# Without giving name to the rows
+nba_player <- read.csv("ppg2008.csv")
+
+#View(nba_players)
+#str(nba_pl)
+```
+
+Heatmap Chart
+===========================================
+
+### Stats by Player {data-width=650}
+
+Data Source: http://datasets.flowingdata.com/ppg2008.csv
+
+```{r}
+#d3heatmap(nba_players, scale = "column")
+heatmaply(nba_players, scale = "none")
+
+```
+
+### Top Scorers {data-width=350}
+
+```{r}
+# Displaying the table using knitr package
+#knitr::kable(nba_players[1:20,c("G", "MIN", "PTS")])
+
+# Displaying table using renderTable() function in shiny
+renderTable({
+  
+  nba_player[1:20,c("Name","G", "MIN", "PTS")]
+  #nba_player[1:20,c(1,2,3,4)]
+  
+})
+
+```
+
+Balloon Plot
+================================================
+
+### Balloon Plot
+```{r}
+renderPlot({
+  
+  ggballoonplot(nba_players, ggtheme = theme_classic(), fill = "red")
+  
+})
+
+```
+
+```{r}
+#rmarkdown::run("NBA_Player_Dashboard.Rmd")
+```

@@ -1,0 +1,44 @@
+---
+title: "Multiple Columns"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    
+
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+```
+
+Column {data-width=600}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+# For column orientation (###) is the row and (------) is the column
+# For row orientation (###) is the column and (------) is the row
+my_dt <- read.csv("german_credit_data.csv")
+
+ggplot(my_dt, aes(x=Duration,y=Credit.amount, color=Risk )) +labs(title = "History of Previous Loan Applicants", x="Duration (Month)", y="Credit Amount (#)")+
+            geom_point()+theme_dark() +scale_x_continuous(breaks = seq(0,90,by=6))
+```
+
+Column {data-width=400}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+boxplot(Credit.amount~Risk, data=my_dt, main="Boxplot of Credit Amount",col="Green")
+```
+
+### Chart C
+
+```{r}
+boxplot(Duration~Risk, data=my_dt, main="Boxplot of Duration",col="Orange")
+```
+

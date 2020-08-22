@@ -1,0 +1,3 @@
+"0","dta_tidy2 <- dta_tidy %>% separate(year, into = c(""year"", ""month""))"
+"0","View(dta_tidy2)"
+"0",""

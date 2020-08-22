@@ -1,0 +1,27 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1590692906781.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4071031466",
+    "id" : "7D61D11E",
+    "lastKnownWriteTime" : 1591144034,
+    "last_content_update" : 1591299048801,
+    "path" : "~/RProject/Personal_Practice_New/FLEXDASHBOARD2/Nigeria_Population.Rmd",
+    "project_path" : "Nigeria_Population.Rmd",
+    "properties" : {
+        "cursorPosition" : "97,2",
+        "last_setup_crc32" : "",
+        "scrollLine" : "82",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

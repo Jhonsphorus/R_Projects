@@ -1,0 +1,7 @@
+"0","library(ggplot2)"
+"2","package ‘ggplot2’ was built under R version 3.6.3"
+"2","Warning message:
+"
+"2","package â€˜RSQLiteâ€™ was built under R version 3.6.3 
+"
+"0","library(MASS)"

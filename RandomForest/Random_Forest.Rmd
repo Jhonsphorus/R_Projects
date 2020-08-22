@@ -1,0 +1,154 @@
+---
+title: "RandomForest"
+author: "Johnson Adebayo"
+date: "4/17/2020"
+output: html_document
+---
+
+# https://www.edureka.co/blog/random-forest-classifier/
+
+#1. Package Loading
+```{r}
+library(caret)
+library(randomForest)
+library(na.tools)
+```
+
+#2. Loading dataset
+```{r}
+train <- read.csv("train.csv")
+test <- read.csv("test.csv")
+View(test)
+```
+
+
+```{r}
+nrow(train)
+ncol(train)
+nrow(test)
+ncol(test)
+
+```
+
+
+```{r}
+str(train)
+```
+
+#3. Data Cleaning
+
+Checking for NULL values
+```{r}
+sapply(train, function(x) sum(is.na(x)))
+```
+
+# Replacing the NULL value in the 'fare' column with its mean value 
+```{r}
+train$fare <- na.mean(train$fare)
+```
+
+# Checking if there is still NULL value in the column 'fare'
+```{r}
+sapply(train, function(x) sum(is.na(x)))
+```
+
+
+#4. Feature selection: Using cross-tabs and conditional box plots to select features for the model
+
+# Using Cross-tabs for categorical variable
+```{r}
+# using cross-tabs to check if the feature or predictor is significant to the response variable 
+table(train[,c('Survived', 'ticket_class')])
+```
+
+```{r}
+table(train[,c('Survived', 'sex')])
+#table(train$Survived,train$sex)
+
+```
+
+```{r}
+table(train[,c('Survived', 'embarked')])
+
+```
+
+# Using conditional box plot for the continuous variable
+
+The box plot of age for people who survived and who didn’t is nearly the same. This means that Age of a person did not have a large effect on whether one survived or not. The y-axis is Age and the x-axis is Survived.
+```{r}
+library(fields)
+bplot.xy(train$Survived, train$age)
+```
+
+
+```{r}
+summary(train$age)
+```
+
+# In the below boxplot, the boxplot for fares are much different for those who survived and those who didn’t. Again, the y-axis is Fare and the x-axis is Survived. So this feature or variable is significant to the response variable 'Survived'
+```{r}
+bplot.xy(train$Survived,train$fare)
+```
+
+
+```{r}
+bplot.xy(train$Survived,train$Siblings_spouses)
+```
+
+
+```{r}
+bplot.xy(train$Survived,train$Parchil)
+```
+
+# Converting the target variable i.e. 'Survived' to categorical variable
+```{r}
+train$Survived <- factor(train$Survived)
+```
+
+#5. Fitting the Random Forest
+```{r}
+control <- trainControl(method = 'cv', number = 10)
+set.seed(2)
+model <- train(Survived~ticket_class+sex+Siblings_spouses+embarked+Parchil+fare,data = train, method = 'rf',trControl = control)
+
+```
+
+
+```{r}
+model
+```
+
+#6. Making prediction with the fitted model using test dataset
+```{r}
+#summary(test)
+sapply(test, function(x) sum(is.na(x)))
+
+```
+
+```{r}
+survival_pred <- predict(model, test)
+
+```
+
+```{r}
+survival_pred
+```
+
+```{r}
+survival_table <- data.frame(test$traveller_ID,test$name,test$sex, survival_pred)
+colnames(survival_table) <- c("TravellerID","Name","Sex","Survival_Prediction")
+View(survival_table)
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+
+
+

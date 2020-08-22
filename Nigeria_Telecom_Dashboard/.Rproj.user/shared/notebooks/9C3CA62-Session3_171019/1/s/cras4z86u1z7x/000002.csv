@@ -1,0 +1,3 @@
+"0","dta<-read_excel(""data/mbta.xlsx"",skip = 1, range = cell_cols(2:60))"
+"0","view(dta)"
+"0",""

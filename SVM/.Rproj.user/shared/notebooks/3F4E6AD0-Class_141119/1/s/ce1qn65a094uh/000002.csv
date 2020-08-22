@@ -1,0 +1,4 @@
+"0","#attach(hs) ## Remove the use of $ sign when callin variables"
+"0","m2 = lm(Price~Bedrooms+Bathrooms+SQFT+Status, data=hs)"
+"2","Error in is.data.frame(data) : object 'hs' not found
+"

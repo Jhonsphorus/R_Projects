@@ -1,0 +1,2 @@
+"0",""
+"0","plot(stocks$company_age,stocks$performance_percent,main = ""Stock Performance Perc Vs company_age"")"

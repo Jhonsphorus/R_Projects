@@ -1,0 +1,4 @@
+"0",""
+"0","intrain <- createDataPartition(y = heart1$target, p= 0.7, list = FALSE)"
+"0","training <- heart1[intrain,]"
+"0","testing <- heart1[-intrain,]"

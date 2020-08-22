@@ -1,0 +1,7 @@
+"0","featurePlot(x = trainData[, 1:18], "
+"0","            y = trainData$Purchase, "
+"0","            plot = ""box"","
+"0","            strip=strip.custom(par.strip.text=list(cex=.7)),"
+"0","            scales = list(x = list(relation=""free""), "
+"0","                          y = list(relation=""free"")))"
+"0",""

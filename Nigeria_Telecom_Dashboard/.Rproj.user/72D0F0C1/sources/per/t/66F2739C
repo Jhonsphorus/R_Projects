@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591805078350.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "66F2739C",
+    "lastKnownWriteTime" : 2389797581032,
+    "last_content_update" : 1591805078350,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "FE10C347",
+        "caption" : "QuarterlySubscriberOperatorData",
+        "contentUrl" : "grid_resource/gridviewer.html?env=_rs_no_env&obj=QuarterlySubscriberOperatorData&cache_key=FE10C347",
+        "displayedObservations" : "24",
+        "environment" : "_rs_no_env",
+        "expression" : "QuarterlySubscriberOperatorData",
+        "object" : "QuarterlySubscriberOperatorData",
+        "preview" : "0",
+        "totalObservations" : "24",
+        "variables" : "6"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 21,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

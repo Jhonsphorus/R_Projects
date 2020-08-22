@@ -1,0 +1,137 @@
+---
+title: "Regression2_14-11-2019"
+author: "Johnson Adebayo_SCV1007 (Cohort 1)"
+date: "11/14/2019"
+output: html_document
+---
+## 14-11-2019
+```{r}
+Age = c(30,41,42,43,31)
+Weight = c(60,67,81,54,69)
+
+```
+
+```{r}
+dt = data.frame(Age,Weight)
+dt
+```
+
+```{r}
+m1 = lm(Age~Weight,dt)
+summary(m1)
+```
+## Since p-value is 0.850  for the slope (b1) the Ho is true (accepted) which show that there is no relationship between weight and Age.
+
+```{r}
+par(mfrow=c(2,2)) 
+plot(m1)
+```
+## To check if there is a linear relationship
+```{r}
+plot(dt$Age~dt$Weight)
+```
+
+CLASSWORK:
+Hypothesis:
+## Ho: There is no significant relationship between Sepal length and Petal length
+## Ha: There is significant relationship between Sepal length and Petal length
+## Level of confidence (alpha): 0.05
+```{r}
+data("iris")
+iris
+```
+```{r}
+#fix(iris)
+```
+
+
+```{r}
+dt1 = data.frame(iris$Sepal.Length,iris$Petal.Length)
+#dt1
+```
+
+
+```{r}
+lm1 = lm(Sepal.Length~Petal.Length, data = iris)
+summary(lm1)
+```
+## CONCLUSION: Since p-value(for slope,b1) is < 2e-16, the Ho is rejected showing that there is significant relationship between Sepal.Length and Petal Length. The degree of my prediction is very high because adjusted R-squared is 0.76 (0.76) i.e. 76% of Sepal length is explained by Petal length
+
+## y = 4.30660 + 0.40892x
+## Sepal.length = 4.30660 + 0.40892(Petal.length)
+##p-value <2e-16 *** : The three asterisks shows that there is high significant differnce (there is relationship)
+## For a unit increase in the Petal length the Sepal length is increase by 0.40892
+
+```{r}
+par(mfrow =c(2,2) )
+plot(lm1)
+```
+## Assumptions:
+1. We have standardize residuals from the Normal QQ
+2. The residuals is normally distributed from the histogram plot(Normality test)
+3. There is Linear relationship between Sepal length and Petal length
+## The histogram plot shows that the residuals of the result is normally distributed
+```{r}
+hist(lm1$residuals)
+```
+# OPTIMIZING THE MODEL
+# To remove outlier: This will improve our result
+## It has increased the Adjusted R-squared:  from 0.7583 to 0.7812
+```{r}
+## How to remove outliers
+#dt[-c(3,4)] # removing row 3,4
+lm2 = lm(Sepal.Length~Petal.Length, data=iris[-c(15,107,132,128,13,6),])
+summary(lm2)
+```
+## Multiple Linear Regression
+
+```{r}
+hs = read.csv("house.csv")
+View(hs)
+```
+
+```{r}
+str(hs)
+```
+
+```{r}
+summary(hs)
+```
+
+```{r}
+m3 = lm(hs$Price~hs$Bedrooms+hs$Bathrooms+hs$SQFT+hs$Status)
+#m3 = lm(Price~.,data = hs[,-c(1,2,7)])
+summary(m3)
+```
+
+## CONCLUSION: The model fitted indicate that factors such as “Bedroom”,”Bathroom” “SQFT” and “StatusRegular” have significant effect on the price of house because their p-values are less than 0.05 (2.78e-11,0.00387, < 2e-16 and 1.93e-11) and their Ho are rejected and Ha are accepted showing that they have relationship with Price. While "StatusShort Sale" do not have effect (or do not have relationship) with the Price because the p-value is greater than 0.05 (0.34036 ) which makes Ho True and it is accepted
+
+# Alternatively
+```{r}
+#attach(hs) ## Remove the use of $ sign when callin variables
+m2 = lm(Price~Bedrooms+Bathrooms+SQFT+Status, data=hs)
+summary(m2)
+```
+
+# Checking if the Assumption for Linear Regression is Satisfied
+
+# The histogram below shows that the residual of the linear regression model is not normally which mean that the assumption is not satisfied
+```{r}
+hist(m3$residuals)
+```
+## Using SHAPIRO-WILK NORMALITY TEST
+## To check if the residual is normally distributed
+## since p < 2.2e-16 we reject Ho and accept Ha, which show that the residual are not normally distributed an 
+## Ho: Residual Normally distributed
+## Ha: Residual Not Normally distributed
+```{r}
+shapiro.test(m3$residuals)
+```
+
+
+
+
+
+
+
+

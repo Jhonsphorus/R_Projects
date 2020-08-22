@@ -1,0 +1,6 @@
+"0","# Option 1 for creating marginal proportional tables"
+"0","#margin.table(prop.table(table(Duration.in.Current.address)), 1)"
+"0","prop.table(table(Duration.in.Current.address))"
+"2","Error in table(Duration.in.Current.address) : 
+  object 'Duration.in.Current.address' not found
+"

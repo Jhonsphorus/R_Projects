@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588288906857.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1979677967",
+    "id" : "AF85F605",
+    "lastKnownWriteTime" : 1585942966,
+    "last_content_update" : 1588289459139,
+    "path" : "~/RProject/Semicolon_Projects/Session8_141119/Class_141119.Rmd",
+    "project_path" : null,
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

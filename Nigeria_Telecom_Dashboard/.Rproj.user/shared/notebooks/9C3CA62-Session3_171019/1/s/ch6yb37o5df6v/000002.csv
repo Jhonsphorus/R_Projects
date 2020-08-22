@@ -1,0 +1,12 @@
+"0",""
+"0","mbta <- read_csv(""Data/mbta.csv"")"
+"2","Parsed with column specification:
+cols(
+  .default = col_double(),
+  mode = [31mcol_character()[39m
+)
+"
+"2","See spec(...) for full column specifications.
+"
+"0","View(mbta)"
+"0",""

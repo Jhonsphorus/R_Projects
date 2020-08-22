@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586282905622.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "99577A6E",
+    "lastKnownWriteTime" : 15481351355891767,
+    "last_content_update" : 1586282905622,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "140D1DD8",
+        "caption" : "logisDf",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=logisDf&cache_key=140D1DD8",
+        "displayedObservations" : "204",
+        "environment" : "",
+        "expression" : "logisDf",
+        "object" : "logisDf",
+        "preview" : "0",
+        "totalObservations" : "204",
+        "variables" : "2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

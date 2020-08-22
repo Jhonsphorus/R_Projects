@@ -1,0 +1,3 @@
+"0","#Creating seperate dataframe for 'Creditability' feature which is our target."
+"0","train.loan_labels <- loan.subset[dat.d,1]"
+"0","test.loan_labels <-loan.subset[-dat.d,1]"

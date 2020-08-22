@@ -1,0 +1,2 @@
+"0","par(mfrow=c(1, 2))  # divide graph area in 2 columns"
+"0","boxplot(cars1$speed, main=""Speed"", sub=paste(""Outlier rows: "", boxplot.stats(cars1$speed)$out))  # box plot for 'speed'"

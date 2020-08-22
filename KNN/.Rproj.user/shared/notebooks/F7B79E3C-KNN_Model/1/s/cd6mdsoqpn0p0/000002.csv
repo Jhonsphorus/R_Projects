@@ -1,0 +1,7 @@
+"0","#Normalization"
+"0","normalize1 <- function(x) {"
+"0","return ((x - min(x)) / (max(x) - min(x))) }"
+"0",""
+"0","# Applying the created normalization"
+"0","loan.subset.n <- as.data.frame(lapply(loan.subset[,2:8], normalize))"
+"0","head(loan.subset.n)"

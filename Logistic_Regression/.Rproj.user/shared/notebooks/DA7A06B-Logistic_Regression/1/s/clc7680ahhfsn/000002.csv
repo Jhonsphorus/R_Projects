@@ -1,0 +1,2 @@
+"0","control <- trainControl(""repeatedcv"",number = 10, repeats = 3)"
+"0","metric <- ""Accuracy"""

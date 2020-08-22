@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591721077762.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "7301A018",
+    "lastKnownWriteTime" : 2096309791936,
+    "last_content_update" : 1591721077762,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "AB131967",
+        "caption" : "subInternetGSM3",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=subInternetGSM3&cache_key=AB131967",
+        "displayedObservations" : 5,
+        "environment" : "",
+        "expression" : "subInternetGSM3",
+        "object" : "subInternetGSM3",
+        "preview" : 0,
+        "totalObservations" : 5,
+        "variables" : 93
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586534540499.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3994154050",
+    "id" : "3EBACDD2",
+    "lastKnownWriteTime" : 1587077176,
+    "last_content_update" : 1587077176111,
+    "path" : "~/RProject/Personal_Practice_New/DecisionTree/DecisionTree.Rmd",
+    "project_path" : "DecisionTree.Rmd",
+    "properties" : {
+        "cursorPosition" : "141,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

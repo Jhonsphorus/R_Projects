@@ -1,0 +1,6 @@
+"0","renderPlot({"
+"0","  boxplot(Duration~Risk, data=my_dt, main=""Boxplot of Duration"",col=""Orange"")"
+"0","  "
+"0","})"
+"1","<shiny.render.function> 
+"

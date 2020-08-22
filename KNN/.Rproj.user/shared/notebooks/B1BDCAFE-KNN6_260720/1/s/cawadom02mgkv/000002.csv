@@ -1,0 +1,8 @@
+"0","# Use the imputation model to predict the values of missing data points"
+"0","#library(RANN)  # required for knnInpute"
+"0","trainData <- predict(preProcess_missingdata_model, newdata = trainData)"
+"0","anyNA(trainData)"
+"1","[1]"
+"1"," FALSE"
+"1","
+"

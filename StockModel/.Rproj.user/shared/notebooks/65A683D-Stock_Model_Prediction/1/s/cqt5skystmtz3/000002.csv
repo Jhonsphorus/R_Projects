@@ -1,0 +1,8 @@
+"0","# Loading the require packages"
+"0","library(GGally) # Package for checking correlation of features"
+"0","library(RSQLite) # Package for connecting to SQLite database"
+"0","library(knitr)  # Package for knitting to html, pdf etc"
+"0","library(tidyverse) # Package for visualization, data manipulation, transformation etc"
+"0","library(na.tools) # Package for checking NA, replacing NA etc"
+"0","library(rsample) # Package for splitting dataset into train and test"
+"0","library(caret) # Package that contain algorithms for modeling"

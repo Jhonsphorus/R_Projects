@@ -1,0 +1,12 @@
+name: flexdashboard_fill
+title: flexdashboard_fill
+username:
+account: phorus
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2350729
+bundleId: 3185629
+url: https://phorus.shinyapps.io/flexdashboard_fill/
+when: 1590363819.15669
+asMultiple: TRUE
+asStatic: FALSE

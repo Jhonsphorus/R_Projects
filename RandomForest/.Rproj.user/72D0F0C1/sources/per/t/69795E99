@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587150870999.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2135895977",
+    "id" : "69795E99",
+    "lastKnownWriteTime" : 1587238403,
+    "last_content_update" : 1587336543584,
+    "path" : "~/RProject/Personal_Practice_New/RandomForest/Random_Forest.Rmd",
+    "project_path" : "Random_Forest.Rmd",
+    "properties" : {
+        "cursorPosition" : "58,44",
+        "scrollLine" : "51",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

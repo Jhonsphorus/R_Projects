@@ -1,0 +1,2 @@
+"0","logis1 <- glm(Class~Cell.shape,family =""binomial"" , data =trainData)"
+"0",""

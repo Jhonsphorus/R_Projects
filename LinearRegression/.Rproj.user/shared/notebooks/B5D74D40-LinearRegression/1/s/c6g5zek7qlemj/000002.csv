@@ -1,0 +1,5 @@
+"0","cor(cars$speed, cars$dist) #Finding Correlation between speed and distance"
+"1","[1]"
+"1"," 0.8068949"
+"1","
+"

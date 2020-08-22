@@ -1,0 +1,4 @@
+"0","control <- trainControl(method=""repeatedcv"", number=10, repeats=3)"
+"0","model <- train(class~., data=train_mushroom, method=""lvq"", preProcess=""scale"", trControl=control)"
+"2","
+"

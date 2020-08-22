@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591741297210.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "287BF481",
+    "lastKnownWriteTime" : 12666584409112633,
+    "last_content_update" : 1591741297210,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "449E9BC",
+        "caption" : "subInternetCDMA3",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=subInternetCDMA3&cache_key=449E9BC",
+        "displayedObservations" : 2,
+        "environment" : "",
+        "expression" : "subInternetCDMA3",
+        "object" : "subInternetCDMA3",
+        "preview" : 0,
+        "totalObservations" : 2,
+        "variables" : 61
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,12 @@
+name: flexdashboard_guage2
+title: flexdashboard_guage2
+username:
+account: jhonsphorus1
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2372213
+bundleId: 3201488
+url: https://jhonsphorus1.shinyapps.io/flexdashboard_guage2/
+when: 1590688613.53173
+asMultiple: FALSE
+asStatic: FALSE

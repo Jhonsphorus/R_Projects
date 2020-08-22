@@ -1,0 +1,2 @@
+"0","# Creating control for the model"
+"0","control <- trainControl(method = ""repeatedcv"", number = 10, repeats = 3)"

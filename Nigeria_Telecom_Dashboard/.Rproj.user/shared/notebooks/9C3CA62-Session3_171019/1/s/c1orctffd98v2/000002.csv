@@ -1,0 +1,4 @@
+"0","dta_tidy <- dta %>% gather('2007-01':'2011-10',key = ""year"", value = ""passengers"")"
+"0","#dta <- dta %>% gather('2007-01':'2011-10',key = ""year"", value = ""passengers"")"
+"0","view(dta_tidy)"
+"0","#View(dta)"

@@ -1,0 +1,37 @@
+---
+title: "Prac2"
+author: "Johnson Adebayo"
+date: "6/9/2020"
+output: html_document
+---
+
+
+```{r}
+
+dt1 <- c("Abj","001")
+dt2 <- c("Lag","002")
+ 
+dt_data <- data.frame(dt1,dt2)
+dt_data
+
+```
+
+
+```{r}
+colnames(dt_data)
+
+
+```
+
+```{r}
+nameid <- c("Oyo","008")
+dt_data<- data.frame(dt_data, nameid)
+
+dt_data
+```
+
+```{r}
+
+colnames(dt_data)
+
+```

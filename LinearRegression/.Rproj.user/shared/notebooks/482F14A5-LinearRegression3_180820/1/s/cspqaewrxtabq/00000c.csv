@@ -1,0 +1,3 @@
+"0","library(e1071)"
+"0","par(mfrow=c(1, 2))  # divide graph area in 2 columns"
+"0","plot(density(cars$speed), main=""Density Plot: Speed"", ylab=""Frequency"", sub=paste(""Skewness:"", round(e1071::skewness(cars$speed), 2)))  # density plot for 'speed'"

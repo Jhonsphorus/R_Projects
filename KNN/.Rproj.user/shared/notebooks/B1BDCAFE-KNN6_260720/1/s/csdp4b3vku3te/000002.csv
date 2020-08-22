@@ -1,0 +1,6 @@
+"0","#dtURL <- 'https://raw.githubusercontent.com/selva86/datasets/master/orange_juice_withmissing.csv'"
+"0",""
+"0","#download.file(url = dtURL, destfile = ""orange_juice_withmissing.csv"")"
+"0","orange1 <- read.csv(""orange_juice_withmissing.csv"", header = TRUE)"
+"0","#View(orange1)"
+"0",""

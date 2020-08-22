@@ -1,0 +1,28 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1590360374535.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2461249924",
+    "id" : "3A5C4399",
+    "lastKnownWriteTime" : 1590363766,
+    "last_content_update" : 1590363767007,
+    "path" : "~/RProject/Personal_Practice_New/FLEXDASHBOARD/flexdashboard_fill.Rmd",
+    "project_path" : "flexdashboard_fill.Rmd",
+    "properties" : {
+        "cursorPosition" : "6,14",
+        "docOutlineVisible" : "0",
+        "last_setup_crc32" : "",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

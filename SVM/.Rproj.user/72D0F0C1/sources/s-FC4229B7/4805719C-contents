@@ -1,0 +1,156 @@
+---
+title: "Regression_081119"
+author: "Johnson Adebayo_SCV1007 (Cohort 1)"
+date: "11/8/2019"
+output: html_document
+---
+
+REGRESSION
+Regression modelling is used to build the relationship between set of variables from measured data through mathematical models.
+
+ClassworK: Plot the Scatter plot of Sepal length against Petal length
+```{r}
+data("iris")
+#a = iris
+#a
+iris
+```
+
+
+```{r}
+library(ggplot2)
+```
+
+N: From the scatter plot, there is positive relationship between the dependent variable “Sepal Length” and the independent variable “ Petal Length"
+
+Hence, to fit a linear regression model in R, we use the lm function.
+```{r}
+ggplot(iris,aes(iris$Petal.Length, iris$Sepal.Length))+geom_point(color="green")+labs(x="Petal Length",y="Sepal Length",title="Sepal Length Vs Petal Length")+theme_dark()
+```
+
+## Fitting Simple linear regression in R
+## bo (intercept on vertical axis)= 4.30660, b1(slope) = 0.40892
+## Since b1 is >0 therefore Petal length and Sepal length have a positive relationship
+## The higher the R-squared and the adjusted R-squared, the better the linear model
+## The lower the standard error, the better the model
+
+## The higher the value of Adjusted R-squared (0.7583 ) the better your model i.e. this show the percentage of how correct your model predict the y value correctly.
+
+## p-value(for the slope) < 2e-16, since p-value is less than 0.05 that mean null hypothesis is rejected for the slope (which is the major concern when determining how the dependent variable depends on the independent variable) and the Ha is true and accepted showing that there is significant different between the slope and zero(i.e.b1 != 0) or there is significant relationship between Sepal.Length and Petal.Length.
+```{r}
+
+m1<-lm(Sepal.Length~Petal.Length, data = iris)
+summary(m1)
+
+```
+
+```{r}
+
+```
+
+## H0 : : Coefficient associated with the variable(x) is equal to zero
+## Ha : : Coefficient is not equal to zero (there is a relationship)
+## So for the case above:
+## For b0(intersect): Ho : bo = 0 (false and rejected)
+##                    Ha : bo != 0 (True and accepted, meaning there is significant diff.)
+
+## For b1(slope): Ho : bo = 0 (false and rejected)
+##                    Ha : bo != 0 (True and accepted, meaning there is significant diff btw ## bo and 0 and there is a relationship between Petal length and sepal length)
+
+
+## Alternatively
+```{r}
+lm1 = lm(iris$Sepal.Length~iris$Petal.Length)
+summary(lm1)
+
+```
+
+```{r}
+(lm1$coefficients)
+```
+
+## Sepal Length = 4.30660 + (0.40892*Petal Length)
+
+```{r}
+y = 4.30660 + (0.40892*x)
+```
+
+## Checking if the Assumption of Linear Regression is Violated
+```{r}
+plot(lm1)
+```
+
+## Alternatively
+```{r}
+#par(mfrow=c(1,2)) # two plots on a row
+par(mfrow=c(2,2)) # two plots on a row, with two rows
+plot(m1)
+
+```
+
+```{r}
+predictive = m1$fitted.values
+sepal_values = iris$Sepal.Length
+result = data.frame(sepal_values,predictive)
+View(result)
+
+```
+
+## Shapiro: To check if the residual (error) is normally distributed.
+## Since the p-value of 0.6767 from the shapiro test is greater than 0.05 the Ho is accepted and Ha is rejected which shows that the residual(error) is normally distributed (there is no significant different)
+```{r}
+shapiro.test(m1$residual)
+
+```
+
+```{r}
+hist(m1$residuals)
+```
+
+## Alternative method of viewing the predictive and the residual
+```{r}
+write.csv(iris, file = "iris.csv")
+```
+
+```{r}
+dt<-read.csv("iris.csv",header = TRUE,sep = ",",dec = ".")
+View(dt)
+```
+
+```{r}
+library(dplyr)
+```
+
+```{r}
+dt1<-dt%>%mutate(Predicted=4.30660+(0.40892*Petal.Length),Residual=Sepal.Length-dt1$Predicted)
+```
+
+```{r}
+View(dt1)
+```
+
+```{r}
+#dt2<-dt1%>%mutate(Residual =Sepal.Length-dt1$Predicted )
+#View(dt2)
+```
+
+```{r}
+write.csv(dt2,file="iris_predicted.csv")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

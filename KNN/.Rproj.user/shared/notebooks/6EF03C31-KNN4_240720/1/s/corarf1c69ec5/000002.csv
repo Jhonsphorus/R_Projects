@@ -1,0 +1,7 @@
+"0","#Creating seperate dataframe for 'Creditability' feature which is our target."
+"0","train.loan_labels <- loan.subset[dat.d,1]"
+"0","train.loan_labels2 <- train.loan[""Creditability""]"
+"0",""
+"0","View(train.loan_labels)"
+"0","View(train.loan_labels2)"
+"0","#test.loan_labels <-loan.subset[-dat.d,1]"
